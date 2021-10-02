@@ -1,0 +1,24 @@
+{
+  "name": "dataforged",
+  "version": "0.0.1-alpha.081921",
+  "description": "Official Ironsworn: Starforged rules data in JSON, for use in community tools.",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farrago/dataforged.git"
+  },
+  "keywords": [
+    "starforged",
+    "ironsworn",
+    "dataforged"
+  ],
+  "author": "resk <hello@rsek.ca>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/farrago/dataforged/issues"
+  },
+  "homepage": "https://github.com/farrago/dataforged#readme"
+}
