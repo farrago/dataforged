@@ -18,13 +18,14 @@ Due to this being preview content, this repo is fairly unstable! As the game gro
 
 ## Current Version/Sources
 
-  * **Rulebook Backer Preview - 081921**
+  * **Rulebook Backer Preview - 101221**
     * oracles (except move oracles)
+    * setting truths
     * encounters/NPCs
-  * **Moves Backer Preview (Discord) - 081921**
+  * **Moves Backer Preview - 113021**
     * moves
     * move oracles
-  * **Asset Backer Preview - 081921**
+  * **Asset Backer Preview - 092921**
     * assets
 
 ## TODO

@@ -1,7 +1,7 @@
 Character Creation:
   Name: Character Creation
   Aliases: [Creation]
-  Content type: oracles
+  Content tags: [oracles]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
@@ -9,8 +9,8 @@ Character Creation:
     - Name: Background Assets
       Description: |-
         If you want some direction for your starting paths, roll or pick from the table below. Roles marked with an asterisk (*) are not intended for solo play.
-      Semantics:
-        Part of speech: [common noun]
+      Content tags: [actor]
+      Part of speech: [noun, common noun]
       Table:
         - [1, 5, Adept, { Assets: [Kinetic, Vestige] }]
         - [6, 10, Battlefield Medic, { Assets: [Healer, Veteran] }]
@@ -35,8 +35,8 @@ Character Creation:
     - Name: Backstory Prompts
       Description: |-
         For some backstory inspiration, roll or pick from the table below. Then, take a moment to elaborate on the suggestion. Or just leave it a bit vague and mysterious for now; you can flesh it out in play.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [event, past]
       Table:
         - [1, 7, You abandoned your kin after learning a troubling truth]
         - [8, 14, You are guided by a vision or prophesy]
@@ -55,8 +55,8 @@ Character Creation:
     - Name: Starship History
       Description: |-
         Envision how you obtained or earned this ship. You can come up with your own origin, or roll or pick from the table below. If you use a result from the table, take a moment to consider and elaborate on the suggestion.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [event, past]
       Table:
         - [1, 8, Acquired in trade for a precious family heirloom]
         - [9, 17, Built out of re-purposed scrap]
@@ -73,8 +73,8 @@ Character Creation:
     - Name: Starship Quirks
       Description: |-
         Your ship is an important aspect of your character—and a character in its own right. What does it look like? What makes it interesting or uniquely yours? Does it have any particular quirks? If nothing occurs to you now, you can flesh it out in play, or roll once or twice on the table below.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [description]
       Max rolls: 2
       Table:
         - [1, 5, Engine room is scorched with old burn marks]
@@ -98,33 +98,35 @@ Character Creation:
         - [91, 95, Things tend to go missing for no logical reason]
         - [96, 100, Timers and clocks are always just a bit off]
     - Name: Sector Trouble
-      Oracle type: peril
-      Semantics:
-        Part of speech: [fragment]
+      Content tags: [peril, event, present]
+      Part of speech: [fragment]
       Table:
         - [1, 5, Blockade prevents trade with other sectors]
         - [6, 10, Bounty hunters search for an infamous fugitive, *suggestNpc]
+        # todo: some kind of faction? hmm
         - [11, 15, Chaotic breaches in spacetime spread like wildfire]
-        - [16, 20, Criminal faction corrupts local authorities]
+        - [16, 20, Criminal faction corrupts local authorities, *suggestFringe]
         - [21, 25, Devastating superweapon has fallen into the wrong hands]
         - [26, 30, Energy storms are rampant]
         - [31, 35, Magnetic disturbances disrupt communication]
         - [36, 40, Newly found resource lures greedy fortune hunters to the sector, *suggestObject]
-        - [41, 45, Notorious pirate clan preys on starships]
+        - [41, 45, Notorious pirate clan preys on starships, *suggestFringe]
         - [46, 50, Parasitic lifeforms spread like a plague, *suggestCreature]
         - [51, 55, Precursor sites throughout the sector emit strange signals, *suggestVault]
         - [56, 60, Prophecies foretell an imminent awakening of a dreadful power]
-        - [61, 65, Raider clan emerges as a dominant threat under a new leader]
-        - [66, 70, Religious zealots overrun the sector]
-        - [71, 75, Rogue AI infiltrates systems throughout the sector]
+        - [61, 65, Raider clan emerges as a dominant threat under a new leader, *suggestFringe]
+        - [66, 70, Religious zealots overrun the sector, *suggestFringe]
+        - [71, 75, Rogue AI infiltrates systems throughout the sector, *suggestFringe]
         - [76, 80, Settlements or factions are on the brink of war, *suggestSettlement]
+        # TODO: this seems like a solid reason to make it easy to do multiple Suggest objects
+        # ideally a faction should be present
         - [81, 85, Ships regularly go missing]
         - [86, 90, Sickness spreads among ships and settlements]
         - [91, 95, Supernova is imminent]
         - [96, 100, Titanic spaceborne lifeform stalks the spaceways, *suggestCreature]
     - Name: Inciting Incident
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [objective]
       Table:
         - [1, 5, Aid a starship caught in a spacetime fracture, *suggestShip]
         - [6, 10, Broker peace between two feuding settlements, *suggestSettlement]
@@ -141,7 +143,7 @@ Character Creation:
         - [61, 65, Recover a cherished pre-exodus artifact from an enemy, *suggestObject]
         - [66, 70, Rescue a starship crew held captive by mutineers, *suggestShip]
         - [71, 75, Retrieve a cache of stolen weapons from a pirate ship, *suggestShip]
-        - [76, 80, Sabotage an enemy installation]
+        - [76, 80, Sabotage an enemy installation, *suggestThemeFortified]
         - [81, 85, Search for a missing expedition in the depths of a precursor vault, *suggestVault]
         - [86, 90, Shield a wondrous lifeform from those who seek to destroy it, *suggestCreature]
         - [91, 95, Track and slay a marauding beast, *suggestCreature]

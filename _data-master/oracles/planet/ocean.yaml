@@ -2,10 +2,10 @@ Ocean World:
   Name: Ocean World
   Aliases: [Ocean]
   Description: *Ocean
-  Content type: oracles
-  Templates:
-    - Name: Ocean World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Ocean World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -14,9 +14,9 @@ Ocean World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/BUCW1rB.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Aegir
     - Alon
@@ -40,6 +40,7 @@ Ocean World:
     - Triton
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 5, *None_thin]
@@ -86,8 +87,7 @@ Ocean World:
             - [100, 100, *Settlements_in_conflict]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Complex reef systems]
@@ -102,8 +102,7 @@ Ocean World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Abyssal trenches]
@@ -123,6 +122,7 @@ Ocean World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 5, None]
         - [6, 15, Extinct]

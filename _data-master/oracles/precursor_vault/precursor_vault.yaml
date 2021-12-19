@@ -2,23 +2,23 @@ Precursor Vault:
   Name: Precursor Vault
   Display name: Precursor Vaults
   Aliases: [Vault]
-  Tags: [oracles,  location]
-  Templates:
-    - Name: Precursor Vault
-      Roles: [place]
-      Inherits:
-        - Category: Space
-          Name: [Peril, Opportunity]
-          Requires:
-            Location: [Orbital, Deep Space, Spaceborne]
-        - Category: Planet
-          Name: [Peril, Opportunity]
-          Requires:
-            Location: [Planetside]
-        - Category: Space
-          Name: [Stellar Object]
-          Requires:
-            Location: [Deep Space]
+  Tags: [oracles, location]
+  # Templates:
+  #   - Name: Precursor Vault
+  #     Roles: [place]
+  #     Inherits:
+  #       - Category: Space
+  #         Name: [Peril, Opportunity]
+  #         Requires:
+  #           Location: [Orbital, Deep Space, Spaceborne]
+  #       - Category: Planet
+  #         Name: [Peril, Opportunity]
+  #         Requires:
+  #           Location: [Planetside]
+  #       - Category: Space
+  #         Name: [Stellar Object]
+  #         Requires:
+  #           Location: [Deep Space]
   Subcategories: [Vault Interior, Vault Sanctum]
   Source:
     Name: Starforged Backer Preview
@@ -26,6 +26,7 @@ Precursor Vault:
   Oracles:
     - Name: Location
       Initial: true
+      Part of speech: [adjective]
       Table:
         - [1, 50, Planetside]
         - [51, 75, Orbital]
@@ -33,8 +34,7 @@ Precursor Vault:
 
     - Name: Scale
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 30, "Minor, confined site"]
         - [31, 65, Typical site of limited scope]
@@ -44,8 +44,7 @@ Precursor Vault:
 
     - Name: Form
       Initial: true
-      Semantics:
-        Part of speech: [common noun]
+      Part of speech: [noun, common noun]
       Table:
         - [1, 35, Structure]
         - [36, 60, Vessel]
@@ -55,8 +54,7 @@ Precursor Vault:
 
     - Name: Shape
       Initial: true
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Table:
         - [1, 15, Practical or functional]
         - [16, 20, Geometric (complex shape)]
@@ -77,8 +75,7 @@ Precursor Vault:
 
     - Name: Material
       Initial: true
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Table:
         - [1, 30, Metallic (industrial)]
         - [31, 60, Metallic (smooth)]
@@ -93,8 +90,7 @@ Precursor Vault:
 
     - Name: First Look
       Display name: Outer First Look
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Initial: true
       Max rolls: 2
       Table:

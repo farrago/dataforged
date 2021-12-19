@@ -2,14 +2,12 @@
   "Name": "Tainted World",
   "Aliases": ["Tainted"],
   "Description": "A foul planet wracked by a poisonous climate and virulent growths.",
-  "Content type": "oracles",
-  "Templates": [{ "Name": "Tainted World", "Roles": ["place"] }],
+  "Content tags": ["oracles"],
   "Subcategory of": "Planet",
   "Category": "Planetary Class",
   "Requires": { "Planetary Class": ["Tainted World"] },
   "Source": { "Name": "Starforged Backer Preview", "Date": "081921" },
   "Thumbnail": "https://i.imgur.com/TPb8p6L.png",
-  "Inherits": [{ "Category": "Planet", "Name": ["Peril", "Opportunity"] }],
   "Sample Names": [
     "Achlys",
     "Animus",
@@ -35,6 +33,7 @@
   "Oracles": [
     {
       "Name": "Atmosphere",
+      "Part of speech": ["adjective"],
       "Initial": true,
       "Table": [
         [
@@ -209,7 +208,7 @@
     },
     {
       "Name": "Observed From Space",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Max rolls": 2,
       "Table": [
         [1, 11, "Expansive fungal plains"],
@@ -250,7 +249,7 @@
     },
     {
       "Name": "Planetside Feature",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Max rolls": 2,
       "Table": [
         [1, 7, "Caustic gas storms"],
@@ -296,6 +295,7 @@
     },
     {
       "Name": "Life",
+      "Part of speech": ["adjective"],
       "Table": [
         [1, 5, "Simple"],
         [6, 15, "Sparse"],

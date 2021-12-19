@@ -2,10 +2,10 @@ Shattered World:
   Name: Shattered World
   Aliases: [Shattered]
   Description: *Shattered
-  Content type: oracles
-  Templates:
-    - Name: Shattered World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Shattered World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -14,9 +14,9 @@ Shattered World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/HKpmALQ.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Cavus
     - Chrysalis
@@ -40,6 +40,7 @@ Shattered World:
     - Zix
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 93, *None_thin]
@@ -82,8 +83,7 @@ Shattered World:
             - [100, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Demolished space fleet, *suggestDerelictStarship]
@@ -98,8 +98,7 @@ Shattered World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Broken cities]
@@ -119,6 +118,7 @@ Shattered World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 30, None]
         - [31, 80, Extinct]

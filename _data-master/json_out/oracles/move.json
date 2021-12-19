@@ -1,7 +1,7 @@
 {
   "Name": "Move",
-  "Content type": "oracles",
-  "Source": { "Name": "Starforged Backer Preview", "Date": "081921" },
+  "Content tags": ["oracles"],
+  "Source": { "Name": "Starforged Backer Preview", "Date": "113021" },
   "Oracles": [
     {
       "Name": "Ask the Oracle",
@@ -56,7 +56,7 @@
     },
     {
       "Name": "Begin a Session",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Table": [
         [
           1,
@@ -203,7 +203,7 @@
     },
     {
       "Name": "Make a Discovery",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Table": [
         [
           1,
@@ -412,7 +412,7 @@
     },
     {
       "Name": "Confront Chaos",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Table": [
         [
           1,
@@ -528,7 +528,7 @@
     },
     {
       "Name": "Take Decisive Action",
-      "Semantics": { "Part of speech": ["sentences"] },
+      "Part of speech": ["sentences"],
       "Table": [
         [
           1,
@@ -552,7 +552,7 @@
     },
     {
       "Name": "Endure Harm",
-      "Semantics": { "Part of speech": ["sentences"] },
+      "Part of speech": ["sentences"],
       "Table": [
         [1, 10, "You suffer mortal harm. [Face Death](#Face-Death)."],
         [
@@ -575,7 +575,7 @@
     },
     {
       "Name": "Endure Stress",
-      "Semantics": { "Part of speech": ["sentences"] },
+      "Part of speech": ["sentences"],
       "Table": [
         [1, 10, "You are overwhelmed. [Face Desolation](#Face-Desolation)."],
         [11, 25, "You give up. [Forsake Your Vow](#Forsake-Your-Vow)."],
@@ -589,7 +589,7 @@
     },
     {
       "Name": "Withstand Damage",
-      "Semantics": { "Part of speech": ["sentences"] },
+      "Part of speech": ["sentences"],
       "Table": [
         [
           1,
@@ -619,7 +619,7 @@
         [
           71,
           85,
-          "It’s a rough ride. All aboard suffer must make the [Endure Harm](#Endure-Harm), [Endure Stress](#Endure-Stress), or [Companion Takes a Hit](#Companion-Takes-a-Hit) move, suffering a serious (-2) cost."
+          "It's a rough ride. All aboard must make the [Endure Harm](#Endure-Harm), [Endure Stress](#Endure-Stress), or [Companion Takes a Hit](#Companion-Takes-a-Hit) move, suffering a serious (-2) cost."
         ],
         [
           86,
@@ -631,7 +631,7 @@
     },
     {
       "Name": "Pay the Price",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Table": [
         [1, 2, "A trusted individual or community acts against you"],
         [

@@ -3,35 +3,13 @@
   "Display name": "Precursor Vaults",
   "Aliases": ["Vault"],
   "Tags": ["oracles", "location"],
-  "Templates": [
-    {
-      "Name": "Precursor Vault",
-      "Roles": ["place"],
-      "Inherits": [
-        {
-          "Category": "Space",
-          "Name": ["Peril", "Opportunity"],
-          "Requires": { "Location": ["Orbital", "Deep Space", "Spaceborne"] }
-        },
-        {
-          "Category": "Planet",
-          "Name": ["Peril", "Opportunity"],
-          "Requires": { "Location": ["Planetside"] }
-        },
-        {
-          "Category": "Space",
-          "Name": ["Stellar Object"],
-          "Requires": { "Location": ["Deep Space"] }
-        }
-      ]
-    }
-  ],
   "Subcategories": ["Vault Interior", "Vault Sanctum"],
   "Source": { "Name": "Starforged Backer Preview", "Date": "081921" },
   "Oracles": [
     {
       "Name": "Location",
       "Initial": true,
+      "Part of speech": ["adjective"],
       "Table": [
         [1, 50, "Planetside"],
         [51, 75, "Orbital"],
@@ -41,7 +19,7 @@
     {
       "Name": "Scale",
       "Initial": true,
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Table": [
         [1, 30, "Minor, confined site"],
         [31, 65, "Typical site of limited scope"],
@@ -53,7 +31,7 @@
     {
       "Name": "Form",
       "Initial": true,
-      "Semantics": { "Part of speech": ["common noun"] },
+      "Part of speech": ["noun", "common noun"],
       "Table": [
         [1, 35, "Structure"],
         [36, 60, "Vessel"],
@@ -65,7 +43,7 @@
     {
       "Name": "Shape",
       "Initial": true,
-      "Semantics": { "Part of speech": ["adjective"] },
+      "Part of speech": ["adjective"],
       "Table": [
         [1, 15, "Practical or functional"],
         [16, 20, "Geometric (complex shape)"],
@@ -95,7 +73,7 @@
     {
       "Name": "Material",
       "Initial": true,
-      "Semantics": { "Part of speech": ["adjective"] },
+      "Part of speech": ["adjective"],
       "Table": [
         [1, 30, "Metallic (industrial)"],
         [31, 60, "Metallic (smooth)"],
@@ -119,7 +97,7 @@
     {
       "Name": "First Look",
       "Display name": "Outer First Look",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Initial": true,
       "Max rolls": 2,
       "Table": [

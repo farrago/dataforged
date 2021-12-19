@@ -2,14 +2,12 @@
   "Name": "Ice World",
   "Aliases": ["Ice"],
   "Description": "A rugged, frozen world—locked in an unending winter.",
-  "Content type": "oracles",
-  "Templates": [{ "Name": "Ice World", "Roles": ["place"] }],
+  "Content tags": ["oracles"],
   "Subcategory of": "Planet",
   "Category": "Planetary Class",
   "Requires": { "Planetary Class": ["Ice World"] },
   "Source": { "Name": "Starforged Backer Preview", "Date": "081921" },
   "Thumbnail": "https://i.imgur.com/r6DIkqJ.png",
-  "Inherits": [{ "Category": "Planet", "Name": ["Peril", "Opportunity"] }],
   "Sample Names": [
     "Beira",
     "Boreas",
@@ -35,6 +33,7 @@
   "Oracles": [
     {
       "Name": "Atmosphere",
+      "Part of speech": ["adjective"],
       "Initial": true,
       "Table": [
         [
@@ -253,7 +252,7 @@
     },
     {
       "Name": "Observed From Space",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Max rolls": 2,
       "Table": [
         [1, 11, "Feeble sunlight"],
@@ -294,7 +293,7 @@
     },
     {
       "Name": "Planetside Feature",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Max rolls": 2,
       "Table": [
         [1, 7, "Abyssal ice fissures"],
@@ -340,6 +339,7 @@
     },
     {
       "Name": "Life",
+      "Part of speech": ["adjective"],
       "Table": [
         [1, 25, "None"],
         [26, 45, "Extinct"],

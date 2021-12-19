@@ -2,10 +2,10 @@ Rocky World:
   Name: Rocky World
   Aliases: [Rocky]
   Description: *Rocky
-  Content type: oracles
-  Templates:
-    - Name: Rocky World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Rocky World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -14,9 +14,9 @@ Rocky World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/wRpdlc1.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Aphelion
     - Artemis
@@ -40,6 +40,7 @@ Rocky World:
     - Umbra
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 65, *None_thin]
@@ -82,8 +83,7 @@ Rocky World:
             - [97, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Barren plains]
@@ -98,8 +98,7 @@ Rocky World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Crystalline formations]
@@ -119,6 +118,7 @@ Rocky World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 55, None]
         - [56, 65, Extinct]

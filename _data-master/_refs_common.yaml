@@ -106,6 +106,34 @@ _refs:
       - Oracles:
           - Category: Creature
             Name: Ultra-scale
+    Faction Legacy, Affiliation: &faction_tpl_1
+      - Oracles:
+          - Category: Faction
+            Name: Legacy
+          - Category: Faction
+            Name: Affiliation
+    Faction Legacy, Identity: &faction_tpl_2
+      - Oracles:
+          - Category: Faction
+            Name: Legacy
+          - Category: Faction
+            Name: Identity
+    Faction Identity, Legacy, Affiliation: &faction_tpl_3
+      - Oracles:
+          - Category: Faction
+            Name: Identity
+          - Category: Faction
+            Name: Legacy
+          - Category: Faction
+            Name: Affiliation
+    Faction Affiliation, Legacy, Identity: &faction_tpl_4
+      - Oracles:
+          - Category: Faction
+            Name: Affiliation
+          - Category: Faction
+            Name: Legacy
+          - Category: Faction
+            Name: Identity
 
   Game objects:
     # consider a way to do precursor vault sanctums?
@@ -239,11 +267,23 @@ _refs:
         - Game object:
             Object type: Derelict
             Attributes: { Derelict Type: Starship }
+    Faction: &suggestFaction
+      Suggest:
+        - Game object:
+            Object type: Faction
+    Fringe faction: &suggestFringe
+      Suggest:
+        - Game object:
+            Object type: Faction
+            Attributes: { Type: Fringe Group }
     Place: &suggestPlace # space sighting
       Suggest:
         - Oracles:
             - Category: Space
               Name: Space Sighting
+    Theme Fortified: &suggestThemeFortified
+      Suggest:
+        - Location Theme: Fortified
     Object: &suggestObject # descriptor + focus
       Suggest:
         - Oracles:

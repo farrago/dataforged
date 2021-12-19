@@ -105,6 +105,34 @@ _refs:
       - Oracles:
           - Category: Creature
             Name: Ultra-scale
+    Faction Legacy, Affiliation: &faction_tpl_1
+      - Oracles:
+          - Category: Faction
+            Name: Legacy
+          - Category: Faction
+            Name: Affiliation
+    Faction Legacy, Identity: &faction_tpl_2
+      - Oracles:
+          - Category: Faction
+            Name: Legacy
+          - Category: Faction
+            Name: Identity
+    Faction Identity, Legacy, Affiliation: &faction_tpl_3
+      - Oracles:
+          - Category: Faction
+            Name: Identity
+          - Category: Faction
+            Name: Legacy
+          - Category: Faction
+            Name: Affiliation
+    Faction Affiliation, Legacy, Identity: &faction_tpl_4
+      - Oracles:
+          - Category: Faction
+            Name: Affiliation
+          - Category: Faction
+            Name: Legacy
+          - Category: Faction
+            Name: Identity
 
   Game objects:
     # consider a way to do precursor vault sanctums?
@@ -238,11 +266,23 @@ _refs:
         - Game object:
             Object type: Derelict
             Attributes: { Derelict Type: Starship }
+    Faction: &suggestFaction
+      Suggest:
+        - Game object:
+            Object type: Faction
+    Fringe faction: &suggestFringe
+      Suggest:
+        - Game object:
+            Object type: Faction
+            Attributes: { Type: Fringe Group }
     Place: &suggestPlace # space sighting
       Suggest:
         - Oracles:
             - Category: Space
               Name: Space Sighting
+    Theme Fortified: &suggestThemeFortified
+      Suggest:
+        - Location Theme: Fortified
     Object: &suggestObject # descriptor + focus
       Suggest:
         - Oracles:
@@ -277,26 +317,26 @@ Character:
   Name: Character
   Display name: Characters
   Aliases: [NPC]
-  Content type: oracles
-  Templates:
-    - Name: NPC
-      Roles: [actor]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: NPC
+  #     Roles: [actor]
   Source:
     Name: Starforged Backer Preview
-    Date: "081921"
+    Date: "101221"
   Oracles:
     - Name: Given Name
-      Subgroup: Name
       Display name: Character Name - Given Name
       Description: |-
         Given and family names can be used independently as standalone names. In many cases you can reverse the order.
       Use with:
         - Category: Character
           Name: Callsign
+          Group: Character Name
         - Category: Character
           Name: Family Name
-      Semantics:
-        Part of speech: [proper noun]
+          Group: Character Name
+      Part of speech: [proper noun]
       Initial: true
       Table:
         - [1, 1, Akim]
@@ -401,17 +441,17 @@ Character:
         - [100, 100, Zoya]
 
     - Name: Callsign
-      Subgroup: Name
       Display name: Character Name - Callsign
       Description: |-
         Spacers are often known only by their callsigns, with their “dirtside names” reserved for family and close friends.
       Use with:
         - Category: Character
           Name: Given Name
+          Group: Character Name
         - Category: Character
           Name: Family Name
-      Semantics:
-        Part of speech: [proper noun]
+          Group: Character Name
+      Part of speech: [proper noun]
       Table:
         - [1, 1, Albatross]
         - [2, 2, Angler]
@@ -491,7 +531,7 @@ Character:
         - [76, 76, Shark]
         - [77, 77, Shutdown]
         - [78, 78, Slack]
-        - [79, 79, Slag]
+        - [79, 79, Slash]
         - [80, 80, Snipe]
         - [81, 81, Spider]
         - [82, 82, Splinter]
@@ -515,17 +555,17 @@ Character:
         - [100, 100, Zephyr]
 
     - Name: Family Name
-      Subgroup: Name
       Display name: Character Name - Family Name
       Description: |-
         Given and family names can be used independently as standalone names. In many cases you can reverse the order.
-      Semantics:
-        Part of speech: [proper noun]
+      Part of speech: [proper noun]
       Use with:
         - Category: Character
           Name: Given Name
+          Group: Character Name
         - Category: Character
           Name: Callsign
+          Group: Character Name
       Initial: true
       Table:
         - [1, 1, Kuzmin]
@@ -630,8 +670,7 @@ Character:
         - [100, 100, Volkov]
 
     - Name: First Look
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Initial: true
       Min rolls: 2
       Max rolls: 2
@@ -677,8 +716,7 @@ Character:
         - [98, 100, Youthful]
 
     - Name: Disposition
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 6, Helpful]
@@ -696,9 +734,8 @@ Character:
 
     - Name: Role
       Display name: Character Role
-      Semantics:
-        Part of speech: [common noun]
-        Content: [people]
+      Part of speech: [noun, common noun]
+      Content tags: [people, actor]
       Initial: true
       Table:
         - [1, 2, Agent]
@@ -752,8 +789,8 @@ Character:
 
     - Name: Goal
       Display name: Character Goal
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [objective]
       Table:
         - [1, 2, Avenge a wrong, *suggestEvent]
         - [3, 4, Build a home]
@@ -798,8 +835,7 @@ Character:
 
     - Name: Revealed Aspect
       Display name: Revealed Character Aspect
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Max rolls: 3
       Table:
         - [1, 1, Addicted]
@@ -907,7 +943,7 @@ Character:
 Character Creation:
   Name: Character Creation
   Aliases: [Creation]
-  Content type: oracles
+  Content tags: [oracles]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
@@ -915,8 +951,8 @@ Character Creation:
     - Name: Background Assets
       Description: |-
         If you want some direction for your starting paths, roll or pick from the table below. Roles marked with an asterisk (*) are not intended for solo play.
-      Semantics:
-        Part of speech: [common noun]
+      Content tags: [actor]
+      Part of speech: [noun, common noun]
       Table:
         - [1, 5, Adept, { Assets: [Kinetic, Vestige] }]
         - [6, 10, Battlefield Medic, { Assets: [Healer, Veteran] }]
@@ -941,8 +977,8 @@ Character Creation:
     - Name: Backstory Prompts
       Description: |-
         For some backstory inspiration, roll or pick from the table below. Then, take a moment to elaborate on the suggestion. Or just leave it a bit vague and mysterious for now; you can flesh it out in play.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [event, past]
       Table:
         - [1, 7, You abandoned your kin after learning a troubling truth]
         - [8, 14, You are guided by a vision or prophesy]
@@ -961,8 +997,8 @@ Character Creation:
     - Name: Starship History
       Description: |-
         Envision how you obtained or earned this ship. You can come up with your own origin, or roll or pick from the table below. If you use a result from the table, take a moment to consider and elaborate on the suggestion.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [event, past]
       Table:
         - [1, 8, Acquired in trade for a precious family heirloom]
         - [9, 17, Built out of re-purposed scrap]
@@ -979,8 +1015,8 @@ Character Creation:
     - Name: Starship Quirks
       Description: |-
         Your ship is an important aspect of your character—and a character in its own right. What does it look like? What makes it interesting or uniquely yours? Does it have any particular quirks? If nothing occurs to you now, you can flesh it out in play, or roll once or twice on the table below.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [description]
       Max rolls: 2
       Table:
         - [1, 5, Engine room is scorched with old burn marks]
@@ -1004,33 +1040,35 @@ Character Creation:
         - [91, 95, Things tend to go missing for no logical reason]
         - [96, 100, Timers and clocks are always just a bit off]
     - Name: Sector Trouble
-      Oracle type: peril
-      Semantics:
-        Part of speech: [fragment]
+      Content tags: [peril, event, present]
+      Part of speech: [fragment]
       Table:
         - [1, 5, Blockade prevents trade with other sectors]
         - [6, 10, Bounty hunters search for an infamous fugitive, *suggestNpc]
+        # todo: some kind of faction? hmm
         - [11, 15, Chaotic breaches in spacetime spread like wildfire]
-        - [16, 20, Criminal faction corrupts local authorities]
+        - [16, 20, Criminal faction corrupts local authorities, *suggestFringe]
         - [21, 25, Devastating superweapon has fallen into the wrong hands]
         - [26, 30, Energy storms are rampant]
         - [31, 35, Magnetic disturbances disrupt communication]
         - [36, 40, Newly found resource lures greedy fortune hunters to the sector, *suggestObject]
-        - [41, 45, Notorious pirate clan preys on starships]
+        - [41, 45, Notorious pirate clan preys on starships, *suggestFringe]
         - [46, 50, Parasitic lifeforms spread like a plague, *suggestCreature]
         - [51, 55, Precursor sites throughout the sector emit strange signals, *suggestVault]
         - [56, 60, Prophecies foretell an imminent awakening of a dreadful power]
-        - [61, 65, Raider clan emerges as a dominant threat under a new leader]
-        - [66, 70, Religious zealots overrun the sector]
-        - [71, 75, Rogue AI infiltrates systems throughout the sector]
+        - [61, 65, Raider clan emerges as a dominant threat under a new leader, *suggestFringe]
+        - [66, 70, Religious zealots overrun the sector, *suggestFringe]
+        - [71, 75, Rogue AI infiltrates systems throughout the sector, *suggestFringe]
         - [76, 80, Settlements or factions are on the brink of war, *suggestSettlement]
+        # TODO: this seems like a solid reason to make it easy to do multiple Suggest objects
+        # ideally a faction should be present
         - [81, 85, Ships regularly go missing]
         - [86, 90, Sickness spreads among ships and settlements]
         - [91, 95, Supernova is imminent]
         - [96, 100, Titanic spaceborne lifeform stalks the spaceways, *suggestCreature]
     - Name: Inciting Incident
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [objective]
       Table:
         - [1, 5, Aid a starship caught in a spacetime fracture, *suggestShip]
         - [6, 10, Broker peace between two feuding settlements, *suggestSettlement]
@@ -1047,25 +1085,24 @@ Character Creation:
         - [61, 65, Recover a cherished pre-exodus artifact from an enemy, *suggestObject]
         - [66, 70, Rescue a starship crew held captive by mutineers, *suggestShip]
         - [71, 75, Retrieve a cache of stolen weapons from a pirate ship, *suggestShip]
-        - [76, 80, Sabotage an enemy installation]
+        - [76, 80, Sabotage an enemy installation, *suggestThemeFortified]
         - [81, 85, Search for a missing expedition in the depths of a precursor vault, *suggestVault]
         - [86, 90, Shield a wondrous lifeform from those who seek to destroy it, *suggestCreature]
         - [91, 95, Track and slay a marauding beast, *suggestCreature]
         - [96, 100, Transport a displaced people to their new home, *suggestPlace]
 Core:
   Name: Core
-  Content type: oracles
+  Content tags: [oracles]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Action
-      Subgroup: Action + Theme
       Use with:
         - Category: Core
           Name: Theme
-      Semantics:
-        Part of speech: [verb]
+          Group: Action + Theme
+      Part of speech: [verb]
       Description: &action_theme_desc |-
         Use these oracle tables to reveal details about a goal, situation, or event. They provide a word or phrase that can be taken literally or interpreted as an abstraction.
 
@@ -1178,13 +1215,12 @@ Core:
         - [100, 100, Withdraw]
 
     - Name: Theme
-      Subgroup: Action + Theme
       Use with:
         - Category: Core
           Name: Action
-      Semantics:
-        Part of speech: [common noun]
-        Content: [abstract noun]
+          Group: Action + Theme
+      Part of speech: [noun, common noun]
+      Content tags: [abstract noun]
       Description: *action_theme_desc
       Table:
         - [1, 1, Ability]
@@ -1289,12 +1325,11 @@ Core:
         - [100, 100, World]
 
     - Name: Descriptor
-      Subgroup: Descriptor + Focus
       Use with:
         - Category: Core
           Name: Focus
-      Semantics:
-        Part of speech: [adjective]
+          Group: Descriptor + Focus
+      Part of speech: [adjective]
       Description: &descriptor_focus_desc |-
         Use these oracles to generate the details of a location, discovery, or encounter. The Descriptor oracle is particularly handy for quick generation of a location. For example, use it to describe the basic nature of a planet instead of rolling on the detailed planet oracles.
 
@@ -1407,13 +1442,12 @@ Core:
         - [100, 100, Violent]
 
     - Name: Focus
-      Subgroup: Descriptor + Focus
       Use with:
         - Category: Core
           Name: Descriptor
-      Semantics:
-        Part of speech: [common noun]
-        Content: concrete noun
+          Group: Descriptor + Focus
+      Part of speech: [noun, common noun]
+      Content tags: [concrete noun]
       Description: *descriptor_focus_desc
       Table:
         - [1, 1, AI]
@@ -1521,16 +1555,17 @@ Core:
 Creature:
   Name: Creature
   Display name: Creatures
-  Content type: oracles
-  Templates:
-    - Name: Creature
-      Roles: [actor]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Creature
+  #     Roles: [actor]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Environment
       Initial: true
+      Part of speech: [noun]
       Description: |-
         Choose the closest match for your location. Or roll to identify the primary habitat of a creature.
       Table:
@@ -1541,10 +1576,8 @@ Creature:
         - [81, 100, Air]
 
     - Name: Scale
-      Subgroup: Scale
       Initial: true
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Table:
         - [1, 3, Minuscule, bug-sized]
         - [4, 10, Tiny, rodent-sized]
@@ -1555,10 +1588,9 @@ Creature:
         - [100, 100, *Ultra-scale]
 
     - Name: Ultra-scale
-      Subgroup: Scale
+      Group: Scale
       Initial: true
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Requires:
         Scale: [Ultra-scale]
       Table:
@@ -1568,8 +1600,7 @@ Creature:
 
     - Name: Basic Form
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Select table by: Environment
       Description: |-
         Roll for a basic form, and flesh out the creature’s appearance using the First Look table.
@@ -1699,9 +1730,8 @@ Creature:
       Initial: true
       Description: |-
         Roll for a basic form, and flesh out the creature’s appearance using the First Look table.
-      Semantics:
-        Part of speech: [fragment]
-        Content: [description]
+      Part of speech: [fragment]
+      Content tags: [description]
       Min rolls: 2
       Max rolls: 2
       Table:
@@ -1759,8 +1789,7 @@ Creature:
     - Name: Encountered Behavior
       Description: |-
         Roll once on the Encountered Behavior table to define this creature’s motivation and frame how the encounter begins.
-      Semantics:
-        Part of speech: [common noun]
+      Part of speech: [noun, common noun]
       Initial: true
       Table:
         - [1, 5, Ambusher]
@@ -1789,8 +1818,7 @@ Creature:
       Display name: Revealed Creature Aspect
       Description: |-
         Roll on this table as you interact with the creature to introduce new features or behaviors. Some results may contradict the established nature of a creature. For example, an amorphous creature which you envisioned as a mass of pure energy would not have typical physical features. If a result doesn’t fit, feel free to ignore, reroll, or adjust. Or simply envision how this contradiction signals a new understanding or unexpected transformation.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 2, Alternative environment]
@@ -1845,20 +1873,434 @@ Creature:
         - [99, 100, Toxic spew]
 
 
+Faction:
+  Name: Faction
+  Display name: Factions
+  Content tags: [oracles]
+  Tags: [oracles]
+  Source:
+    Name: Starforged Backer Preview
+    Date: "101221"
+  Oracles:
+    - Name: Type
+      Display name: Faction Type
+      Part of speech: [noun]
+      Table:
+        - [1, 40, Dominion]
+        - [41, 70, Guild]
+        - [71, 100, Fringe Group]
+    - Name: Influence
+      Part of speech: [adjective]
+      Table:
+        - [1, 10, Forsaken, Banished or forgotten]
+        - [11, 30, Isolated, Limited influence in a remote location]
+        - [31, 50, Localized, Marginal influence in a single sector]
+        - [51, 70, Established, Strong influence in a single sector]
+        - [71, 85, Notable, Dispersed influence across a few sectors]
+        - [86, 95, Dominant, Far-reaching influence across many sectors]
+        - [96, 100, Inescapable, Pervasive influence across inhabited space]
+    - Name: Dominion
+      Requires:
+        Type: [Dominion]
+      Part of speech: [noun]
+      Content tags: [abstract noun]
+      Max rolls: 3
+      Table:
+        - [1,5,Agriculture]
+        - [6,9,Artistry]
+        - [10,14,Commerce]
+        - [15,18,Conquest]
+        - [19,22,Construction]
+        - [23,26,Diplomacy]
+        - [27,30,Education]
+        - [31,34,Environmentalism]
+        - [35,38,Exploration]
+        - [39,42,Faith]
+        - [43,46,History]
+        - [47,50,Honor]
+        - [51,55,Industry]
+        - [56,59,Isolationism]
+        - [60,63,Law]
+        - [64,67,Mysticism]
+        - [68,71,Pacifism]
+        - [72,75,Prophecy]
+        - [76,79,Science]
+        - [80,83,Secrecy]
+        - [84,87,Technology]
+        - [88,91,Treachery]
+        - [92,96,Warfare]
+        - [97,100,Wealth]
+    - Name: Leadership
+      Display name: Dominion / Leadership
+      Part of speech: [fragment]
+      Content tags: [description]
+      Requires:
+        Type: [Dominion]
+      Table:
+        - [1,5, Anarchist]
+        - [6,15, Disputed leadership]
+        - [16,30, Authoritarian dictatorship]
+        - [31,45, Oligarchical elite]
+        - [46,60, Dynastic lineage]
+        - [61,70, Fated or prophesied leader]
+        - [71,80, Clan chiefs or elders]
+        - [81,90, Elected representatives]
+        - [91,95, Machine intelligence]
+        - [96,100, Varied / decentralized]
+    - Name: Guild
+      Requires:
+        Type: [Guild]
+      Part of speech: [noun, plural]
+      Content tags: [actor]
+      Table:
+        - [1, 5, Assassins]
+        - [6, 10, Bounty Hunters]
+        - [11, 15, Couriers]
+        - [16, 20, Courtesans]
+        - [21, 25, Engineers]
+        - [26, 30, Healers]
+        - [31, 40, Industrialists]
+        - [41, 50, Mercenaries]
+        - [51, 60, Merchants]
+        - [61, 65, Mystics]
+        - [66, 75, Navigators]
+        - [76, 80, Peacekeepers]
+        - [81, 85, Researchers]
+        - [86, 90, Spies]
+        - [91, 100, *Roll_twice]
+    - Name: Fringe Group
+      Requires:
+        Type: [Fringe Group]
+      Part of speech: [noun, plural]
+      Content tags: [actor]
+      Table:
+        - [1, 5, Cultists]
+        - [6, 15, Exiles]
+        - [16, 25, Gangsters]
+        - [26, 35, Hackers]
+        - [36, 40, Monster hunters]
+        - [41, 50, Pirates]
+        - [51, 60, Raiders]
+        - [61, 70, Rebels]
+        - [71, 75, Rogue AI]
+        - [76, 85, Scavengers]
+        - [86, 95, Smugglers]
+        - [96, 100, *Roll_twice]
+    - Name: Projects
+      Display name: Faction Projects
+      Part of speech: [fragment]
+      Content tags: [objective]
+      Max rolls: 2
+      Description: Pick or roll on this table to reveal the current focus of a faction. Then, use the nature of the organization to help envision the meaning of the project. The result may introduce events which motivate your character to aid or resist the project, or can simply serve as background detail for your setting. If you would like to track the faction’s progress, set a clock for the project using the campaign clock guidelines on page 229.
+      Table:
+        - [1, 3, Broaden scope of the faction to include a new focus]
+        - [4, 6, Build or secure a powerful device]
+        - [7, 9, Consolidate control of a valuable commodity]
+        - [10, 12, Destroy or defeat a rival]
+        - [13, 15, Disrupt the operations of a rival]
+        - [16, 18, Escape the control of another faction or power]
+        - [19, 21, Establish a monument or memorial]
+        - [22, 24, Establish a safe refuge or headquarters]
+        - [25, 27, Expand operations to a new location or sector]
+        - [28, 30, Form an alliance]
+        - [31, 33, Fulfill a prophecy]
+        - [34, 36, Give aid to a faction]
+        - [37, 39, Harness unnatural or forbidden power]
+        - [40, 42, Hunt down a rogue asset]
+        - [43, 45, Incite conflict among rivals]
+        - [46, 48, Negotiate an agreement]
+        - [49, 51, Obtain a needed commodity]
+        - [52, 54, Obtain an important cultural artifact]
+        - [55, 57, Obtain crucial data or information]
+        - [58, 60, Obtain incriminating information about a rival]
+        - [61, 63, Prevent a prophecy]
+        - [64, 66, Put down an internal revolt or rebellion]
+        - [67, 69, Repay a debt]
+        - [70, 72, Rescue or recover a group or asset]
+        - [73, 75, Research an innovation]
+        - [76, 78, Resolve a conflict with another faction]
+        - [79, 81, Reunite splintered elements of the faction]
+        - [82, 84, Seize a powerful artifact or valuable treasure]
+        - [85, 87, Seize rival territory or operations]
+        - [88, 90, Subsume another faction]
+        - [91, 93, Transport a valued asset]
+        - [94, 96, Usurp leadership within a rival faction]
+        - [97, 100, *Action+Theme]
+    - Name: Relationships
+      Display name: Faction Relationships
+      Part of speech: [fragment]
+      Content tags: []
+      Description: Factions can add scale and narrative opportunities to your setting. But keep it manageable. Don’t overload your campaign with factions. Instead, focus on your interactions and entanglements with members of a few interesting factions. Then, when you have a question about the relationship of one faction to another, use this table. The result is the commonly understood connection between those factions. Further investigations or events may reveal a deeper or alternate truth.
+      Table:
+        - [1, 4, Antagonistic towards]
+        - [5, 8, Apathetic or unaware of]
+        - [9, 11, Betrayed by]
+        - [12, 14, Broke faith with]
+        - [15, 18, Distrustful of]
+        - [19, 22, Does business with]
+        - [23, 25, Extorted by]
+        - [26, 29, Holds contempt for]
+        - [30, 33, Holds leverage over]
+        - [34, 36, In control of]
+        - [37, 40, Maneuvering against]
+        - [41, 44, Needs aid from]
+        - [45, 47, Negotiating with]
+        - [48, 51, Open alliance with]
+        - [52, 54, Owes a debt to]
+        - [55, 58, Shares a rivalry with]
+        - [59, 61, Shares power with]
+        - [62, 64, Shows respect for]
+        - [65, 67, Splintered from]
+        - [68, 70, Subordinate to]
+        - [71, 74, Supplied with resources by]
+        - [75, 78, Supplies resources to]
+        - [79, 81, Temporary alliance with]
+        - [82, 85, Tolerates]
+        - [86, 89, Trades favors with]
+        - [90, 92, Unjustly accused by]
+        - [93, 96, Warring with]
+        - [97, 100, *Roll_twice]
+    - Name: Name Template
+      Part of speech: [name, proper noun]
+      Content tags: [template]
+      Display name: Faction Name Template
+      Description: |-
+        To generate a faction name, first roll or choose the name template. Then, follow the structure of the template to build the name from individual tables. If you’ve already set the faction type, picking from the tables (instead of rolling) will likely provide a more appropriate result. For example, “Silver Jackals” is a fitting name for a criminal organization. The “Empire of the Undying Suns” is a less apt name for that gang—unless their leader is prone to delusions of grandeur. In short, choosing a name will give you more control. Rolling might give you a result that doesn’t square with known aspects, but those contradictions may prove inspiring.
+
+        An alternative approach to generate a faction from scratch is to start with a random name. Then, consider what the name evokes and choose an appropriate faction type instead of rolling on those tables. For example, “Bloody Ravens” might suggest a mercenary guild, while the “Republic of the Radiant Servants” brings to mind a dominion built upon a religion, or one which idolizes a prophesied leader. If a result doesn’t inspire anything interesting, roll again or simply pick.
+      Table:
+        - [1, 40, "[▶️Legacy] [▶️Affiliation]", *faction_tpl_1]
+        - [41, 55, "[▶️Legacy] [▶️Identity]", *faction_tpl_2]
+        - [56, 70, "[▶️Identity] of the [▶️Legacy] [▶️Affiliation]", *faction_tpl_3]
+        - [71, 100, "[▶️Affiliation] of the [▶️Legacy] [▶️Identity]", *faction_tpl_4]
+    - Name: Legacy
+      Part of speech: [adjective]
+      Table:
+        - [1, 2, Ancient]
+        - [3, 4, Ashen]
+        - [5, 6, Awakened]
+        - [7, 8, Azure]
+        - [9, 10, Blessed]
+        - [11, 12, Bloody]
+        - [13, 14, Broken]
+        - [15, 16, Ceaseless]
+        - [17, 18, Stellar]
+        - [19, 20, Crimson]
+        - [21, 22, Cursed]
+        - [23, 24, Dawning]
+        - [25, 26, Dissident]
+        - [27, 28, Ebon]
+        - [29, 30, Elder]
+        - [31, 32, Enduring]
+        - [33, 34, Enlightened]
+        - [35, 36, Exalted]
+        - [37, 38, Fallen]
+        - [39, 40, Fated]
+        - [41, 42, First]
+        - [43, 44, Forgotten]
+        - [45, 46, Forsaken]
+        - [47, 48, Gloaming]
+        - [49, 50, Golden]
+        - [51, 52, Hidden]
+        - [53, 54, Infernal]
+        - [55, 56, Infinite]
+        - [57, 58, Iron]
+        - [59, 60, Kindred]
+        - [61, 62, Obsidian]
+        - [63, 64, Radiant]
+        - [65, 66, Risen]
+        - [67, 68, Sacred]
+        - [69, 70, Sapphire]
+        - [71, 72, Scarlet]
+        - [73, 74, Serene]
+        - [75, 76, Shattered]
+        - [77, 78, Shining]
+        - [79, 80, Silent]
+        - [81, 82, Silver]
+        - [83, 84, Sovereign]
+        - [85, 86, Sundered]
+        - [87, 88, Supreme]
+        - [89, 90, Undying]
+        - [91, 92, Unified]
+        - [93, 94, United]
+        - [95, 96, Universal]
+        - [97, 98, Veiled]
+        - [99, 100, Wandering]
+    - Name: Affiliation
+      Part of speech: [noun]
+      Content tags: [organization, actor]
+      Table:
+        - [1, 4, Accord]
+        - [5, 8, Alliance]
+        - [9, 12, Ascendancy]
+        - [13, 16, Circle]
+        - [17, 20, Coalition]
+        - [21, 24, Collective]
+        - [25, 28, Commonwealth]
+        - [29, 32, Confederation]
+        - [33, 36, Consortium]
+        - [37, 40, Council]
+        - [41, 44, Court]
+        - [45, 48, Covenant]
+        - [49, 52, Dominion]
+        - [53, 56, Empire]
+        - [57, 60, Federation]
+        - [61, 64, Imperium]
+        - [65, 68, League]
+        - [69, 72, Legion]
+        - [73, 76, Order]
+        - [77, 80, Pact]
+        - [81, 84, Regiment]
+        - [85, 88, Republic]
+        - [89, 92, Sphere]
+        - [93, 96, Syndicate]
+        - [97, 100, Union]
+    - Name: Identity
+      Part of speech: [noun, plural]
+      Table:
+        - [1, 2, Blades]
+        - [3, 4, Builders]
+        - [5, 6, Daggers]
+        - [7, 8, Defenders]
+        - [9, 10, Disciples]
+        - [11, 12, Domains]
+        - [13, 14, Drifters]
+        - [15, 16, Embers]
+        - [17, 18, Flames]
+        - [19, 20, Fleet]
+        - [21, 22, Guardians]
+        - [23, 24, Hammers]
+        - [25, 26, Harbingers]
+        - [27, 28, Heralds]
+        - [29, 30, Hounds]
+        - [31, 32, Hunters]
+        - [33, 34, Jackals]
+        - [35, 36, Keepers]
+        - [37, 38, Knights]
+        - [39, 40, Menders]
+        - [41, 42, Outcasts]
+        - [43, 44, Phantoms]
+        - [45, 46, Planets]
+        - [47, 48, Raiders]
+        - [49, 50, Ravens]
+        - [51, 52, Realms]
+        - [53, 54, Reavers]
+        - [55, 56, Relics]
+        - [57, 58, Seekers]
+        - [59, 60, Sentinels]
+        - [61, 62, Serpents]
+        - [63, 64, Servants]
+        - [65, 66, Shadows]
+        - [67, 68, Shards]
+        - [69, 70, Skulls]
+        - [71, 72, Souls]
+        - [73, 74, Specters]
+        - [75, 76, Stars]
+        - [77, 78, Suns]
+        - [79, 80, Swarm]
+        - [81, 82, Swords]
+        - [83, 84, Talons]
+        - [85, 86, Vanguards]
+        - [87, 88, Wardens]
+        - [89, 90, Watchers]
+        - [91, 92, Wolves]
+        - [93, 94, Worlds]
+        - [95, 96, Wraiths]
+        - [97, 98, Wreckers]
+        - [99, 100, Wrights]
+    - Name: Quirks
+      Display name: Faction Quirks
+      Content tags: [description]
+      Part of speech: [fragment]
+      Max rolls: 2
+      Description: |-
+        Roll or pick known characteristics of the faction and its members using this table. But keep in mind that even within a small or specialized faction, there are no absolutes. These quirks represent common attitudes, practices, or approaches, but are not universal to every member of that faction. Leave room in your portrayal for diversity and contradictions.
+      Table:
+        - [1, 3, Advocates individualism]
+        - [4, 6, Ancient or coded language]
+        - [7, 9, Animal or creature motif used as a faction symbol]
+        - [10, 12, Banishes the disloyal]
+        - [13, 15, Body augmentations are respected and valued]
+        - [16, 18, Body ornamentations signify castes or roles]
+        - [19, 21, Dependent on an addictive substance]
+        - [22, 24, Distinctive or elaborate clothing]
+        - [25, 27, Elite soldiers provide defense or serve as bodyguards]
+        - [28, 30, Favors a signature weapon]
+        - [31, 33, Guided by superstition or prophecy]
+        - [34, 36, Heavily stratified social structure]
+        - [37, 39, Hoards precursor artifacts]
+        - [40, 42, Honors the fallen through unusual death rites]
+        - [43, 45, Idolizes a long-dead founder or martyr]
+        - [46, 48, Keeps exhaustive records or archives]
+        - [49, 51, Lives off-planet in spaceborne fleets]
+        - [52, 54, Members take a new name when joining the faction]
+        - [55, 57, Nomadic people and mobile operations]
+        - [58, 60, Operates under strict codes or laws]
+        - [61, 63, Recognizes others through a distinctive greeting or gesture]
+        - [64, 66, Reliant on machine intelligence]
+        - [67, 69, Resolves disputes through formal duels]
+        - [70, 72, Rites of adulthood or ascension]
+        - [73, 75, Shuns or distrusts machine intelligence]
+        - [76, 78, Starships share a distinctive and recognizable profile]
+        - [79, 81, Suspicious of outsiders]
+        - [82, 84, Symbiotic relationship with a specific creature]
+        - [85, 87, Trades in a unique currency]
+        - [88, 90, Trains in a demanding physical discipline or martial art]
+        - [91, 93, Wields unnatural abilities or strange technologies]
+        - [94, 96, Work or environments cause mutations]
+        - [97, 100, *Action+Theme]
+    - Name: Rumors
+      Display name: Faction Rumors
+      Part of speech: [fragment]
+      Content tags: [event, present]
+      Max rolls: 2
+      Description: Use this table when you are in a position to investigate a faction by uncovering secrets or fishing for gossip.
+      Table:
+        - [1, 3, Caught in the crossfire of feuding factions]
+        - [4, 6, Colluding with a criminal enterprise]
+        - [7, 9, Corrupted by a dangerous power]
+        - [10, 12, Critical resource is in short supply]
+        - [13, 15, Defenses are overextended]
+        - [16, 18, Developing revolutionary technology]
+        - [19, 21, Digital systems are corrupted or infiltrated]
+        - [22, 24, Heavily in debt]
+        - [25, 27, Hit hard by a recent attack or calamity]
+        - [28, 30, Holds a powerful artifact]
+        - [31, 33, Holds incriminating information against a leader or faction]
+        - [34, 36, Hording a valuable commodity]
+        - [37, 39, Infiltrated by a rival faction]
+        - [40, 42, Knows the location of a fabled treasure or lost technology]
+        - [43, 45, Leaders are haunted by a dark prophecy]
+        - [46, 48, Leaders are incompetent]
+        - [49, 51, Leaders are puppets of another power or faction]
+        - [52, 54, Lesser members of the leadership are plotting a coup]
+        - [55, 57, New belief or religion is creating a schism among members]
+        - [58, 60, Operations are a false front for their true purpose]
+        - [61, 63, Overdependence on a failing or vulnerable technology]
+        - [64, 66, Plagued by infighting and low morale]
+        - [67, 69, Plotting to betray an allied faction]
+        - [70, 72, Preparing a major offensive or operation]
+        - [73, 75, Pulling the strings of a leader or faction]
+        - [76, 78, Recently acquired an unexpected fortune]
+        - [79, 81, Secretly supporting a reviled faction]
+        - [82, 84, Sheltering an infamous or dangerous fugitive]
+        - [85, 87, Suffered destructive sabotage from within]
+        - [88, 90, Suffering a shortage of key workers or personnel]
+        - [91, 93, Uprising or revolt is brewing from within]
+        - [94, 96, Vulnerable to attack or aggression]
+        - [97, 100, *Action+Theme]
 Miscellaneous:
   Name: Miscellaneous
   Aliases: [Misc]
-  Content type: oracles
+  Content tags: [oracles]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Story Complication
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Aliases: [complication]
-      Semantics:
-        Part of speech: [fragment]
-        Content: [event]
+      Part of speech: [fragment]
       Description: |-
         This oracle will introduce narrative turns, troubles, and revelations. It can be used as an alternative to the Pay the Price table when you encounter a negative outcome at a crucial moment. In particular, you might use this table after rolling matched 10s on the challenge dice.
       Table:
@@ -1893,10 +2335,8 @@ Miscellaneous:
         - [96, 100, *Roll_twice]
 
     - Name: Combat Action
-      Oracle type: peril
-      Semantics:
-        Part of speech: [fragment]
-        Content: [event]
+      Part of speech: [fragment]
+      Content tags: [peril, event, present]
       Description: |-
         Use this oracle to help inspire an action for a foe in a fight. When you’re not sure what an enemy does next, particularly when they have you in a bad spot, roll on this table and interpret the result as appropriate to the nature of the enemy and your objective.
       Table:
@@ -1936,10 +2376,8 @@ Miscellaneous:
 
     - Name: Anomaly Effect
       Aliases: [Anomaly]
-      Oracle type: peril
-      Semantics:
-        Part of speech: [fragment]
-        Content: [event]
+      Part of speech: [fragment]
+      Content tags: [peril, event, present]
       Description: |-
         Meddling with alien artifacts or forbidden magic may put you at the mercy of chaos. Use this table to resolve the effects of ancient tech, rituals, or other strange forces. Results on this table may prompt devastating implications, so use it only in rare and dramatic moments.
       Table:
@@ -1980,10 +2418,10 @@ Miscellaneous:
 
 Move:
   Name: Move
-  Content type: oracles
+  Content tags: [oracles]
   Source:
     Name: Starforged Backer Preview
-    Date: "081921"
+    Date: "113021"
   Oracles:
     - Name: Ask the Oracle
       Aliases: [Ask]
@@ -2113,8 +2551,7 @@ Move:
             # - [91, 98, "Yes"]
             # - [99, 100, HELL YES!]
     - Name: Begin a Session
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Flashback reveals an aspect of your background or nature, *suggestEvent]
         - [11, 20, "Flashback reveals an aspect of another character, place, or faction", *suggestEvent]
@@ -2127,8 +2564,7 @@ Move:
         - [81, 90, Unexpected peril lies ahead or lurks just out of view, *suggestEvent]
         - [91, 100, Unforeseen aid is on the way or within reach, *suggestEvent]
     - Name: Make a Discovery
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 4, Advanced technology waiting to be harnessed or salvaged, *suggestObject]
         - [5, 8, Ancient archive or message, *suggestEvent]
@@ -2155,8 +2591,7 @@ Move:
         - [91, 100, *Roll_twice]
 
     - Name: Confront Chaos
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 4, Baneful weapon of mass destruction, *suggestObject]
         - [5, 9, Cataclysmic environmental effects]
@@ -2183,8 +2618,7 @@ Move:
         - [97, 100, Worshipers of great and malevolent powers]
 
     - Name: Take Decisive Action
-      Semantics:
-        Part of speech: [sentences]
+      Part of speech: [sentences]
       Table:
         - [1, 40, "It’s worse than you thought: You or an ally make a suffer move (-2)"]
         - [41, 52, "The victory is short-lived: A new peril or foe is revealed"]
@@ -2194,23 +2628,16 @@ Move:
         - [89, 100, "It gets complicated: The true nature of a foe or objective is revealed"]
 
     - Name: Endure Harm
-      Semantics:
-        Part of speech: [sentences]
+      Part of speech: [sentences]
       Table:
         - [1, 10, "You suffer mortal harm. [Face Death](#Face-Death)."]
-        - [11, 20, "You are dying. Within an hour or two, you must [Heal](#Heal) and raise your
-          health above 0, or [Face Death](#Face-Death)."]
-        - [21, 35, "You are unconscious and out of action. If left alone, you come back to
-          your senses in an hour or two. If you are vulnerable to ongoing harm,
-          [Face Death](#Face-Death)."]
-        - [36, 50, "You are reeling and fighting to stay conscious. If you engage in any
-          vigorous activity before taking a breather for a few minutes, roll on
-          this table again (before resolving the other move)."]
+        - [11, 20, "You are dying. Within an hour or two, you must [Heal](#Heal) and raise your health above 0, or [Face Death](#Face-Death)."]
+        - [21, 35, "You are unconscious and out of action. If left alone, you come back to your senses in an hour or two. If you are vulnerable to ongoing harm, [Face Death](#Face-Death)."]
+        - [36, 50, "You are reeling and fighting to stay conscious. If you engage in any vigorous activity before taking a breather for a few minutes, roll on this table again (before resolving the other move)."]
         - [51, 100, You are still standing.]
 
     - Name: Endure Stress
-      Semantics:
-        Part of speech: [sentences]
+      Part of speech: [sentences]
       Table:
         - [1, 10, "You are overwhelmed. [Face Desolation](#Face-Desolation)."]
         - [11, 25, "You give up. [Forsake Your Vow](#Forsake-Your-Vow)."]
@@ -2218,29 +2645,19 @@ Move:
         - [51, 100, You persevere.]
 
     - Name: Withstand Damage
-      Semantics:
-        Part of speech: [sentences]
+      Part of speech: [sentences]
       Table:
         - [1, 10, "Immediate catastrophic destruction. All aboard must [Endure Harm](#Endure-Harm) or [Face Death](#Face-Death), as appropriate."]
-        - [11, 25, "Destruction is imminent and unavoidable. If you do not have the means or
-          intention to get clear, [Endure Harm](#Endure-Harm) or [Face Death](#Face-Death) as
-          appropriate."]
-        - [26, 40, "Destruction is imminent, but can be averted if you [Repair](#Repair) your
-          vehicle and raise its integrity above 0. If you fail, see 11-25."]
-        - [41, 55, "You cannot [Repair](#Repair) this vehicle until you [Resupply](#Resupply) and obtain a
-          crucial replacement part. If you roll this result again prior to that,
-          see 11-25."]
-        - [56, 70, "The vehicle is crippled or out of your control. To get it back in
-          action, you must [Repair](#Repair) and raise its integrity above 0."]
-        - [71, 85, "It’s a rough ride. All aboard suffer must make the [Endure Harm](#Endure-Harm),
-          [Endure Stress](#Endure-Stress), or [Companion Takes a Hit](#Companion-Takes-a-Hit) move, suffering a
-          serious (-2) cost."]
+        - [11, 25, "Destruction is imminent and unavoidable. If you do not have the means or intention to get clear, [Endure Harm](#Endure-Harm) or [Face Death](#Face-Death) as appropriate."]
+        - [26, 40, "Destruction is imminent, but can be averted if you [Repair](#Repair) your vehicle and raise its integrity above 0. If you fail, see 11-25."]
+        - [41, 55, "You cannot [Repair](#Repair) this vehicle until you [Resupply](#Resupply) and obtain a crucial replacement part. If you roll this result again prior to that, see 11-25."]
+        - [56, 70, "The vehicle is crippled or out of your control. To get it back in action, you must [Repair](#Repair) and raise its integrity above 0."]
+        - [71, 85, "It's a rough ride. All aboard must make the [Endure Harm](#Endure-Harm), [Endure Stress](#Endure-Stress), or [Companion Takes a Hit](#Companion-Takes-a-Hit) move, suffering a serious (-2) cost."]
         - [86, 95, "You’ve lost fuel, energy, or cargo. [Sacrifice Resources](#Sacrifice-Resources) (-2)."]
         - [96, 100, "Against all odds, the vehicle holds together."]
 
     - Name: Pay the Price
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 2, A trusted individual or community acts against you]
         - [3, 4, An individual or community you care about is exposed to danger]
@@ -2267,30 +2684,31 @@ Move:
 Settlement:
   Name: Settlement
   Display name: Settlements
-  Content type: oracles
-  Templates:
-    - Name: Settlement
-      Roles: [place]
-      Inherits:
-      - Category: Space
-        Name: [Stellar Object]
-        # TODO: an 'as' tag for renaming attributes?
-        Requires:
-          Location: [Deep Space]
-      - Category: Space
-        Name: [Peril, Opportunity]
-        Requires:
-          Location: [Orbital, Deep Space]
-      - Category: Planet
-        Name: [Peril, Opportunity]
-        Requires:
-          Location: [Planetside]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Settlement
+  #     Roles: [place]
+  #     Inherits:
+  #     - Category: Space
+  #       Name: [Stellar Object]
+  #       # TODO: an 'as' tag for renaming attributes?
+  #       Requires:
+  #         Location: [Deep Space]
+  #     - Category: Space
+  #       Name: [Peril, Opportunity]
+  #       Requires:
+  #         Location: [Orbital, Deep Space]
+  #     - Category: Planet
+  #       Name: [Peril, Opportunity]
+  #       Requires:
+  #         Location: [Planetside]
   Source:
     Name: Starforged Backer Preview
-    Date: "060121"
+    Date: "092921"
   Oracles:
     - Name: Location
       Initial: true
+      Part of speech: [adjective]
       Table:
         - [1, 40, Planetside]
         - [41, 75, Orbital]
@@ -2335,9 +2753,8 @@ Settlement:
 
     - Name: First Look
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
-        Content: description
+      Part of speech: [fragment]
+      Content tags: [description]
       Max rolls: 2
       Table:
         - [1, 3, Beautiful architecture]
@@ -2364,9 +2781,8 @@ Settlement:
 
     - Name: Initial Contact
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
-        Content: description
+      Part of speech: [fragment]
+      Content tags: [description]
       Table:
         - [1, 20, Welcoming]
         - [21, 30, Neutral / automated]
@@ -2382,8 +2798,7 @@ Settlement:
 
     - Name: Authority
       Initial: true
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Table:
         - [1, 15, None / lawless]
         - [16, 30, Ineffectual]
@@ -2395,9 +2810,8 @@ Settlement:
 
     - Name: Projects
       Display name: Settlement Projects
-      Semantics:
-        Part of speech: [common noun]
-        Content: abstract noun
+      Part of speech: [noun, common noun]
+      Content tags: [abstract noun]
       Max rolls: 2
       Description: |-
         Check the Settlement Projects table when it’s appropriate for your character to know or uncover these details. Projects are the main industry, function, or focus of a settlement. They do not necessarily represent every activity at the site—particularly at a large settlement—but are the most visible or noteworthy aspects.
@@ -2438,11 +2852,10 @@ Settlement:
 
     - Name: Trouble
       Display name: Settlement Trouble
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Description: |-
         Check the Settlement Trouble table when it’s appropriate for your character to know or uncover these details. The Settlement Trouble table provides a broad description of the site’s most dramatic current issue.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 3, Betrayal from within]
         - [4, 7, Blocked resource, *suggestObject]
@@ -2480,8 +2893,8 @@ Settlement:
       Description: |-
         Choose a name appropriate to the nature of the settlement, or roll for a random result. You can let the name stand alone, or pair it with one of the following tags: Base, Citadel, Depot, Fortress, Hold, Landing, Outpost, Port, Station, Terminal.
       Initial: true
-      Semantics:
-        Part of speech: [proper noun]
+      Part of speech: [proper noun]
+      Content tags: [name]
       Table:
         - [1, 1, Aegis]
         - [2, 2, Altair]
@@ -2580,7 +2993,7 @@ Settlement:
         - [95, 95, Vesper]
         - [96, 96, Wayward]
         - [97, 97, Welkin]
-        - [98, 98, Wellpsring]
+        - [98, 98, Wellspring]
         - [99, 99, Weyland]
         - [100, 100, Wreck]
 
@@ -2589,7 +3002,7 @@ Space:
   Name: Space
   Display name: Space Encounters
   Aliases: [Spaceborne]
-  Content type: oracles
+  Content tags: [oracles]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
@@ -2605,8 +3018,7 @@ Space:
   Oracles:
     - Name: Space Sighting
       Allow duplicate rolls: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Description: |-
         Use the Space Sightings oracle to introduce a location or encounter on a spaceborne expedition. For example, roll on this table when you Ask the Oracle to envision the primary feature of a waypoint as you Undertake an Expedition. Check your result by referencing the column for your current location: Terminus, Outlands, or Expanse.
       Select table by: Region
@@ -2691,11 +3103,7 @@ Space:
           - [99, 100, *Roll_three_times_Rep_ok]
 
     - Name: Stellar Object
-      Use with:
-        - Name: Descriptor
-          Category: Core
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 15, Smoldering red star, "https://i.imgur.com/M3UenpW.jpg"]
         - [16, 30, Glowing orange star, "https://i.imgur.com/2zM2NAr.jpg"]
@@ -2713,76 +3121,75 @@ Space:
 
     - Name: Sector Name - Prefix
       Description: To give a sector or region of space a random name, roll once for the first word and once for the second word. Or just roll once choose a suitable pairing from anywhere in that row.
-      Subgroup: Sector Name
       Use with:
         - Category: Space
           Name: Sector Name - Suffix
+          Group: Sector Name
       Initial: true
-      Semantics:
-        Part of speech: [proper noun]
-        Capitalize: true
+      Part of speech: [adjective]
+      Content tags: [template fragment]
+
       Table:
         - [1, 2, Accursed]
         - [3, 4, Ashen]
-        - [5, 6, Asteria]
+        - [5, 6, Asteria, {Part of speech: [proper noun]}]
         - [7, 8, Bitter]
         - [9, 10, Blighted]
         - [11, 12, Bloodied]
         - [13, 14, Boundless]
         - [15, 16, Burning]
-        - [17, 18, Cortana]
-        - [19, 20, Corvus]
+        - [17, 18, Cortana, {Part of speech: [proper noun]}]
+        - [19, 20, Corvus, {Part of speech: [proper noun]}]
         - [21, 22, Crimson]
-        - [23, 24, Cygnus]
-        - [25, 26, Delphi]
-        - [27, 28, Delphian]
-        - [29, 30, Devil's]
+        - [23, 24, Cygnus, {Part of speech: [proper noun]}]
+        - [25, 26, Delphi, {Part of speech: [proper noun]}]
+        - [27, 28, Delphian, {Part of speech: [proper noun]}]
+        - [29, 30, Devil's, {Part of speech: [proper noun, possessive case]}]
         - [31, 32, Ebon]
-        - [33, 34, Essus]
+        - [33, 34, Essus, {Part of speech: [proper noun]}]
         - [35, 36, Fallen]
         - [37, 38, Ferrous]
-        - [39, 40, Fool's]
+        - [39, 40, Fool's, {Part of speech: [proper noun, possessive case]}]
         - [41, 42, Forgotten]
         - [43, 44, Haunted]
         - [45, 46, Hidden]
         - [47, 48, Hollow]
         - [49, 50, Igneous]
         - [51, 52, Infernal]
-        - [53, 54, Invidia]
+        - [53, 54, Invidia, {Part of speech: [proper noun]}]
         - [55, 56, Iron]
-        - [57, 58, Kalidas]
-        - [59, 60, Kronos]
-        - [61, 62, Lacuna]
-        - [63, 64, Lumen]
-        - [65, 66, Mobius]
-        - [67, 68, Morien]
+        - [57, 58, Kalidas, {Part of speech: [proper noun]}]
+        - [59, 60, Kronos, {Part of speech: [proper noun]}]
+        - [61, 62, Lacuna, {Part of speech: [proper noun]}]
+        - [63, 64, Lumen, {Part of speech: [proper noun]}]
+        - [65, 66, Mobius, {Part of speech: [proper noun]}]
+        - [67, 68, Morien, {Part of speech: [proper noun]}]
         - [69, 70, Onyx]
         - [71, 72, Outer]
-        - [73, 74, Sanguis]
+        - [73, 74, Sanguis, {Part of speech: [proper noun]}]
         - [75, 76, Scarred]
         - [77, 78, Scorched]
         - [79, 80, Shattered]
         - [81, 82, Shrouded]
-        - [83, 84, Sindri]
-        - [85, 86, Solana]
+        - [83, 84, Sindri, {Part of speech: [proper noun]}]
+        - [85, 86, Solana, {Part of speech: [proper noun]}]
         - [87, 88, Stygian]
-        - [89, 90, Sulaco]
+        - [89, 90, Sulaco, {Part of speech: [proper noun]}]
         - [91, 92, Sundered]
-        - [93, 94, Thunor]
+        - [93, 94, Thunor, {Part of speech: [proper noun]}]
         - [95, 96, Vanguard]
         - [97, 98, Veiled]
         - [99, 100, Wasted]
 
     - Name: Sector Name - Suffix
       Description: To give a sector or region of space a random name, roll once for the first word and once for the second word. Or just roll once choose a suitable pairing from anywhere in that row.
-      Subgroup: Sector Name
       Use with:
         - Category: Space
           Name: Sector Name - Prefix
+          Group: Sector Name
       Initial: true
-      Semantics:
-        Part of speech: [proper noun]
-        Capitalize: true
+      Part of speech: [noun]
+      Content tags: [template fragment, place]
       Table:
         - [1, 2, Abyss]
         - [3, 4, Anvil]
@@ -2836,11 +3243,10 @@ Space:
         - [99, 100, Zenith]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Display name: Spaceborne Peril
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Requires:
         Location: [Spaceborne, Orbital, Deep Space]
       Description: Use this oracle as an alternative to the [Pay the Price](#Pay-the-Price) table and the creative prompt oracles when you want inspiration for a trouble on an interstellar journey, or to generate a perilous event at a spaceborne facility.
@@ -2860,7 +3266,7 @@ Space:
         - [37, 39, Isolation or fear presses in]
         - [40, 42, Life support system malfunctions]
         - [43, 45, Meteoroid storm fills the sky]
-        - [46, 48, Mysterious wreckage portends a new threat]
+        - [46, 48, Mysterious wreckage portends a new threat, *suggestDerelictStarship]
         - [49, 51, Nearby settlement calls for help, *suggestSettlement]
         - [52, 54, Old repair or patch fails]
         - [55, 57, Onboard dispute or inner turmoil causes a disruption]
@@ -2873,7 +3279,7 @@ Space:
         - [76, 78, Shockwave or gravity wave approaches]
         - [79, 81, Someone questions your presence here]
         - [82, 84, Stellar anomaly emits hazardous energies]
-        - [85, 87, Threatening lifeform draws near]
+        - [85, 87, Threatening lifeform draws near, *suggestCreature]
         - [88, 90, Troubling visions or apparitions]
         - [91, 93, "True nature of a cargo, occupant, or passenger is revealed"]
         - [94, 96, Unsettling sounds or disturbances]
@@ -2881,11 +3287,10 @@ Space:
         - [100, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Display name: Spaceborne Opportunity
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Requires:
         Location: [Spaceborne, Orbital, Deep Space]
       Description: Roll on this table when you need inspiration for a beneficial encounter or event on a spaceborne journey, such as when you roll a strong hit with a match as you [Undertake an Expedition](#Undertake-an-Expedition), or if you [Explore a Waypoint](#Explore-a-Waypoint) and find an opportunity.
@@ -2902,14 +3307,14 @@ Space:
         - [37, 40, Friendly interaction with a benign lifeform, *suggestCreature]
         - [41, 44, Friendly settlement in range, *suggestSettlement]
         - [45, 48, Friendly spacers at work here, *suggestNpc]
-        - [49, 52, Friendly starship crosses your path]
+        - [49, 52, Friendly starship crosses your path, *suggestShip]
         - [53, 56, Helpful or encouraging message from an acquaintance]
         - [57, 60, Impressive vista offers comfort or inspiration]
         - [61, 64, Interesting site offers opportunities for exploration]
         - [65, 68, Mineral or energy resource detected]
         - [69, 72, Navigational or environmental hazard is left behind]
         - [73, 76, Opening to escape or avoid foes]
-        - [77, 80, Plea for help from a potential benefactor]
+        - [77, 80, Plea for help from a potential benefactor, *suggestNpc]
         - [81, 84, Probe or beacon with useful data]
         - [85, 88, "Refuge offers a place to hide, plan, or recover"]
         - [89, 92, Sensors pinpoint a lurking foe]
@@ -2920,13 +3325,13 @@ Space:
 Starship:
   Name: Starship
   Aliases: [Ship]
-  Content type: oracles
-  Templates:
-    - Name: Starship
-      Roles: [actor, place]
-      Inherits:
-        - Category: Space
-          Name: [Peril, Opportunity]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Starship
+  #     Roles: [actor, place]
+  #     Inherits:
+  #       - Category: Space
+  #         Name: [Peril, Opportunity]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
@@ -2935,9 +3340,8 @@ Starship:
       Display name: Starship Name
       Description: |-
         Give a starship a name when it has an important role in your story. Scan this table and select a name which fits what you know of the ship’s appearance and role. Or generate a random result and let any contradictions contribute to the ship’s history or nature.
-      Semantics:
-        Part of speech: [proper noun]
-        Content: [name]
+      Part of speech: [noun, proper noun]
+      Content tags: [name]
       Table:
         - [1, 1, Arclight]
         - [2, 2, Argent Arrow]
@@ -3044,8 +3448,7 @@ Starship:
       Display name: Type
       Allow duplicate rolls: true
       Initial: true
-      Semantics:
-        Part of speech: [common noun, fragment]
+      Part of speech: [common noun, fragment]
       Table:
         - [1, 2, Carrier, Launches fighters]
         - [3, 6, Corvette, Light attack ship]
@@ -3072,8 +3475,7 @@ Starship:
         # the above isn't formatted as a roll twice object because it's essentially calling for the generation of a whole-ass starship!
 
     - Name: Fleet
-      Semantics:
-        Part of speech: [common noun]
+      Part of speech: [noun, common noun]
       Initial: true
       Requires:
         Starship Type: [Fleet]
@@ -3089,8 +3491,8 @@ Starship:
 
     - Name: Initial Contact
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
+      Content tags: [relationship]
       Table:
         - [1, 3, Familiar]
         - [4, 15, Friendly]
@@ -3107,9 +3509,8 @@ Starship:
 
     - Name: First Look
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
-        Content: [description]
+      Part of speech: [fragment]
+      Content tags: [description]
       Max rolls: 2
       Table:
         - [1, 4, Abnormal sensor readings]
@@ -3137,9 +3538,8 @@ Starship:
 
     - Name: Mission
       Display name: Starship Mission
-      Semantics:
-        Part of speech: [fragment]
-        Content: [quest]
+      Part of speech: [fragment]
+      Content tags: [objective]
       Description: |-
         Use the Starship Mission table when prompted by another oracle, or to flesh out the nature of a ship or fleet which has a flexible or uncertain role. You can also roll to generate the focus of a spaceborne quest.
       Select table by: Region
@@ -3264,10 +3664,10 @@ Derelict:
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
-  Content type: oracles
-  Templates:
-    - Name: Derelict
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Derelict
+  #     Roles: [place]
   Subcategories:
     - Access
     - Community
@@ -3279,36 +3679,37 @@ Derelict:
     - Research
   Description: |-
     Derelicts are the forsaken relics of human endeavors. Use these First Look tables for your initial survey of the derelict. To reveal more about the look and original function or nature of the site, roll on appropriate tables in the Starship or Settlement oracles. If you explore the depths of a derelict, you may use the zone oracles on the following pages to help envision what you find.
-  Inherits:
-    - Category: Settlement
-      Exclude: [Location, Initial Contact]
-      Requires:
-        Derelict Type:
-          - Settlement
-    - Category: Starship
-      Exclude: [Location, Initial Contact]
-      Requires:
-        Derelict Type:
-          - Starship
-    - Category: Space
-      Name: [Peril, Opportunity]
-      Requires:
-        Location:
-          - Orbital
-          - Deep Space
-    - Category: Space
-      Name: [Stellar Object]
-      Requires:
-        Location:
-          - Deep Space
-    - Category: Planet
-      Name: [Peril, Opportunity]
-      Requires:
-        Location:
-          - Planetside
+  # Inherits:
+  #   - Category: Settlement
+  #     Exclude: [Location, Initial Contact]
+  #     Requires:
+  #       Derelict Type:
+  #         - Settlement
+  #   - Category: Starship
+  #     Exclude: [Location, Initial Contact]
+  #     Requires:
+  #       Derelict Type:
+  #         - Starship
+  #   - Category: Space
+  #     Name: [Peril, Opportunity]
+  #     Requires:
+  #       Location:
+  #         - Orbital
+  #         - Deep Space
+  #   - Category: Space
+  #     Name: [Stellar Object]
+  #     Requires:
+  #       Location:
+  #         - Deep Space
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
+  #     Requires:
+  #       Location:
+  #         - Planetside
   Oracles:
     - Name: Location
       Initial: true
+      Part of speech: [adjective]
       Table:
         - [1, 40, Planetside]
         - [41, 60, Orbital]
@@ -3347,8 +3748,7 @@ Derelict:
 
     - Name: Condition
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Functional]
         - [11, 30, Limited power]
@@ -3358,10 +3758,8 @@ Derelict:
         - [99, 100, Impending destruction]
 
     - Name: Outer First Look
-      Oracle type: First Look
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 15, Blocked access]
         - [16, 30, Corpses]
@@ -3375,9 +3773,7 @@ Derelict:
         - [96, 100, Time or reality distortions]
 
     - Name: Inner First Look
-      Oracle type: First Look
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 3, Abnormal gravity]
@@ -3419,6 +3815,7 @@ Derelict:
       Select table by: Derelict Type
       Tables:
         - Display name: Derelict Zone - Starship
+          Name: Starship
           Requires:
             Derelict Type:
               - Starship
@@ -3432,6 +3829,7 @@ Derelict:
             - [91, 100, ▶️Research]
 
         - Display name: Derelict Zone - Settlement
+          Name: Settlement
           Requires:
             Derelict Type:
               - Settlement
@@ -3449,7 +3847,7 @@ Chaotic:
   Display name: Location Theme - Chaotic
   Subcategory of: Location Theme
   Category: Theme
-  Content type: oracles
+  Content tags: [oracles]
   Description: *Chaotic
   Requires:
     Theme Type: [Chaotic]
@@ -3460,8 +3858,7 @@ Chaotic:
     - Name: Feature
       Description: *theme_feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Alterations in the flow of time]
         - [9, 16, "Chaotic portal, focus, or conduit"]
@@ -3479,10 +3876,9 @@ Chaotic:
 
     - Name: Peril
       Description: *theme_peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 9, Chaos makes its mark upon you]
         - [10, 18, Chaos spreads or intensifies]
@@ -3499,10 +3895,9 @@ Chaotic:
 
     - Name: Opportunity
       Description: *theme_opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Chaos ebbs or withdraws for a time]
         - [21, 40, Chaos empowers you with strange but useful abilities]
@@ -3516,7 +3911,7 @@ Fortified:
   Display name: Location Theme - Fortified
   Subcategory of: Location Theme
   Category: Theme
-  Content type: oracles
+  Content tags: [oracles]
   Description: *Fortified
   Requires:
     Theme Type: [Fortified]
@@ -3527,8 +3922,7 @@ Fortified:
     - Name: Feature
       Description: *theme_feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Captives or prisoners]
         - [9, 16, Control area or terminal]
@@ -3546,10 +3940,9 @@ Fortified:
 
     - Name: Peril
       Description: *theme_peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 9, Alarm is triggered]
         - [10, 18, Automated security or weapons target you]
@@ -3566,10 +3959,9 @@ Fortified:
 
     - Name: Opportunity
       Description: *theme_opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Insight into the plans or methods of the enemy force]
         - [21, 40, Opening to get the drop on an enemy]
@@ -3583,7 +3975,7 @@ Haunted:
   Display name: Location Theme - Haunted
   Subcategory of: Location Theme
   Category: Theme
-  Content type: oracles
+  Content tags: [oracles]
   Description: *Haunted
   Requires:
     Theme Type: [Haunted]
@@ -3594,8 +3986,7 @@ Haunted:
     - Name: Feature
       Description: *theme_feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Disembodied voices]
         - [9, 16, Eerie cold]
@@ -3613,10 +4004,9 @@ Haunted:
 
     - Name: Peril
       Description: *theme_peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 9, Assailed by an angry or vengeful being]
         - [10, 18, Beguiling illusions tempt you to linger or stay]
@@ -3633,10 +4023,9 @@ Haunted:
 
     - Name: Opportunity
       Description: *theme_opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Encounter with a benign spirit or being]
         - [21, 40, Helpful vision of past events]
@@ -3650,7 +4039,7 @@ Infested:
   Display name: Location Theme - Infested
   Subcategory of: Location Theme
   Category: Theme
-  Content type: oracles
+  Content tags: [oracles]
   Description: *Infested
   Requires:
     Theme Type: [Infested]
@@ -3661,8 +4050,7 @@ Infested:
     - Name: Feature
       Description: *theme_feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Corpse of an unfortunate victim]
         - [9, 16, "Eggs, cocoons, or nest"]
@@ -3680,10 +4068,9 @@ Infested:
 
     - Name: Peril
       Description: *theme_peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 9, Creatures attack without warning]
         - [10, 18, Creatures guided or controlled by a greater threat]
@@ -3700,10 +4087,9 @@ Infested:
 
     - Name: Opportunity
       Description: *theme_opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Clue to the nature or vulnerabilities of these creatures]
         - [21, 40, Creatures turn on each other]
@@ -3717,7 +4103,7 @@ Inhabited:
   Display name: Location Theme - Inhabited
   Subcategory of: Location Theme
   Category: Theme
-  Content type: oracles
+  Content tags: [oracles]
   Description: *Inhabited
   Requires:
     Theme Type: [Inhabited]
@@ -3728,8 +4114,7 @@ Inhabited:
     - Name: Feature
       Description: *theme_feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Conspicuous patrols or surveillance]
         - [9, 16, Crews at work]
@@ -3747,10 +4132,9 @@ Inhabited:
 
     - Name: Peril
       Description: *theme_peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 9, Announcement or notification brings harrowing news]
         - [10, 18, Arrival of a foe or rival]
@@ -3767,10 +4151,9 @@ Inhabited:
 
     - Name: Opportunity
       Description: *theme_opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Intriguing offer from an unexpected source]
         - [21, 40, Lively festival or gathering place provides a chance to socialize]
@@ -3782,7 +4165,7 @@ Inhabited:
 Location Theme:
   Name: Location Theme
   Display name: Location Themes
-  Content type: oracles
+  Content tags: [oracles]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
@@ -3790,6 +4173,7 @@ Location Theme:
     - Name: Theme Type
       Description: |-
         Themes help you envision atmosphere, features, and encounters within an unusual, aberrant, or important location. You can answer questions about a place using only the tables provided for a theme, such as when delving into an **Infested** cave. Or you can pair a theme with other location oracles for more flavor and variety; for example, you might explore a **Haunted Grave World**, a **Ruined Derelict**, a **Sacred Precusor Vault**, or an **Inhabited Settlement**.
+      Part of speech: [adjective]
       Table:
         - [1, 15, Chaotic, *Chaotic]
         - [16, 30, Fortified, *Fortified]
@@ -3805,7 +4189,7 @@ Ruined:
   Display name: Location Theme - Ruined
   Subcategory of: Location Theme
   Category: Theme
-  Content type: oracles
+  Content tags: [oracles]
   Description: *Ruined
   Requires:
     Theme Type: [Ruined]
@@ -3816,8 +4200,7 @@ Ruined:
     - Name: Feature
       Description: *theme_feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Collapsed or broken structures or terrain]
         - [9, 16, Device or artifact with residual power or function]
@@ -3835,10 +4218,9 @@ Ruined:
 
     - Name: Peril
       Description: *theme_peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 9, Dreadful atmosphere of loss and destruction weighs upon you]
         - [10, 18, Evidence of a horrible fate for others who passed this way]
@@ -3855,10 +4237,9 @@ Ruined:
 
     - Name: Opportunity
       Description: *theme_opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Access to an untouched or preserved area]
         - [21, 40, Insight into what brought this place to ruin]
@@ -3872,7 +4253,7 @@ Sacred:
   Display name: Location Theme - Sacred
   Subcategory of: Location Theme
   Category: Theme
-  Content type: oracles
+  Content tags: [oracles]
   Description: *Sacred
   Requires:
     Theme Type: [Sacred]
@@ -3883,8 +4264,7 @@ Sacred:
     - Name: Feature
       Description: *theme_feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Adherents performing worship or enacting rituals]
         - [9, 16, Altar or temple]
@@ -3902,10 +4282,9 @@ Sacred:
 
     - Name: Peril
       Description: *theme_peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 9, An aspect of the faith beguiles you or lures you into danger]
         - [10, 18, Dreadful aspects or powers of the faith are revealed]
@@ -3922,10 +4301,9 @@ Sacred:
 
     - Name: Opportunity
       Description: *theme_opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Access to a hidden or sealed area]
         - [21, 40, Encounter with a helpful adherent or heretic]
@@ -3938,10 +4316,10 @@ Desert World:
   Name: Desert World
   Aliases: [Desert]
   Description: *Desert
-  Content type: oracles
-  Templates:
-    - Name: Desert World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Desert World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -3976,6 +4354,7 @@ Desert World:
     - Vermillion
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 10, *None_thin]
@@ -4020,8 +4399,7 @@ Desert World:
             - [97, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Dry seabeds]
@@ -4036,8 +4414,7 @@ Desert World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Cavernous sinkholes]
@@ -4057,6 +4434,7 @@ Desert World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 25, None]
         - [26, 45, Extinct]
@@ -4071,10 +4449,10 @@ Furnace World:
   Name: Furnace World
   Aliases: [Furnace]
   Description: *Furnace
-  Content type: oracles
-  Templates:
-    - Name: Furnace World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Furnace World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -4083,9 +4461,9 @@ Furnace World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/YS5rlDR.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Ash
     - Azula
@@ -4109,6 +4487,7 @@ Furnace World:
     - Vesuvius
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 10, *None_thin]
@@ -4152,8 +4531,7 @@ Furnace World:
             - [99, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Fiery world-spanning chasms]
@@ -4168,8 +4546,7 @@ Furnace World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Blinding ash storms]
@@ -4189,6 +4566,7 @@ Furnace World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 30, None]
         - [31, 50, Extinct]
@@ -4203,10 +4581,10 @@ Grave World:
   Name: Grave World
   Aliases: [Grave]
   Description: *Grave
-  Content type: oracles
-  Templates:
-    - Name: Grave World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Grave World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -4215,9 +4593,9 @@ Grave World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/88R1WP1.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Anubis
     - Banshee
@@ -4241,6 +4619,7 @@ Grave World:
     - Thrace
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 10, *None_thin]
@@ -4282,8 +4661,7 @@ Grave World:
             - [99, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Broken moon]
@@ -4298,8 +4676,7 @@ Grave World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Acid pools]
@@ -4319,6 +4696,7 @@ Grave World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 25, None]
         - [26, 85, Extinct]
@@ -4330,10 +4708,10 @@ Ice World:
   Name: Ice World
   Aliases: [Ice]
   Description: *Ice
-  Content type: oracles
-  Templates:
-    - Name: Ice World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Ice World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -4342,9 +4720,9 @@ Ice World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/r6DIkqJ.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Beira
     - Boreas
@@ -4368,6 +4746,7 @@ Ice World:
     - Varnholme
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 15, *None_thin]
@@ -4412,8 +4791,7 @@ Ice World:
             - [97, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Feeble sunlight]
@@ -4428,8 +4806,7 @@ Ice World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Abyssal ice fissures]
@@ -4449,6 +4826,7 @@ Ice World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 25, None]
         - [26, 45, Extinct]
@@ -4463,10 +4841,10 @@ Jovian World:
   Name: Jovian World
   Aliases: [Jovian]
   Description: *Jovian
-  Content type: oracles
-  Templates:
-    - Name: Jovian World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Jovian World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -4475,9 +4853,9 @@ Jovian World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/xRT70k8.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Aether
     - Arrokoth
@@ -4501,6 +4879,7 @@ Jovian World:
     - Zephyr
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 50, *Toxic]
@@ -4543,8 +4922,7 @@ Jovian World:
             - [97, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Complex ring system]
@@ -4559,8 +4937,7 @@ Jovian World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Clouds of metal particles]
@@ -4580,6 +4957,7 @@ Jovian World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 50, None]
         - [51, 55, Extinct]
@@ -4594,10 +4972,10 @@ Jungle World:
   Name: Jungle World
   Aliases: [Jungle]
   Description: *Jungle
-  Content type: oracles
-  Templates:
-    - Name: Jungle World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Jungle World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -4606,9 +4984,9 @@ Jungle World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/jr90Bnh.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Acacia
     - Aster
@@ -4632,6 +5010,7 @@ Jungle World:
     - Viridian
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 25, *Toxic]
@@ -4677,8 +5056,7 @@ Jungle World:
             - [100, 100, *Settlements_in_conflict]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Cloud-breaching trees]
@@ -4693,8 +5071,7 @@ Jungle World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Bioluminescent flora]
@@ -4714,6 +5091,7 @@ Jungle World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 5, Simple]
         - [6, 20, Sparse]
@@ -4726,10 +5104,10 @@ Ocean World:
   Name: Ocean World
   Aliases: [Ocean]
   Description: *Ocean
-  Content type: oracles
-  Templates:
-    - Name: Ocean World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Ocean World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -4738,9 +5116,9 @@ Ocean World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/BUCW1rB.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Aegir
     - Alon
@@ -4764,6 +5142,7 @@ Ocean World:
     - Triton
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 5, *None_thin]
@@ -4810,8 +5189,7 @@ Ocean World:
             - [100, 100, *Settlements_in_conflict]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Complex reef systems]
@@ -4826,8 +5204,7 @@ Ocean World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Abyssal trenches]
@@ -4847,6 +5224,7 @@ Ocean World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 5, None]
         - [6, 15, Extinct]
@@ -4861,7 +5239,7 @@ Planet:
   Name: Planet
   Display name: Planets
   Aliases: [World]
-  Content type: oracles
+  Content tags: [oracles]
   Subcategories:
     - Desert World
     - Furnace World
@@ -4877,12 +5255,13 @@ Planet:
   Source:
     Name: Starforged Backer Preview
     Date: "060121"
-  Inherits:
-    - Category: Space
-      Name: [Stellar Object]
+  # Inherits:
+  #   - Category: Space
+  #     Name: [Stellar Object]
   Oracles:
     - Name: Planetary Class
       Initial: true
+      Part of speech: [noun]
       # Use with:
       #   - Name: Descriptor
       #     Category: Core
@@ -4901,10 +5280,9 @@ Planet:
 
     - Name: Peril
       Display name: Planetside Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Description: |-
         Choose or roll on this table when you want inspiration for a trouble during planetside exploration or a planetside expedition.
       Select table by: Life
@@ -4985,12 +5363,11 @@ Planet:
 
     - Name: Opportunity
       Display name: Planetside Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
       Description: |-
         Choose or roll on this table when you want inspiration for a beneficial encounter or event on a planetside journey, such as when you roll a strong hit with a match as you Undertake an Expedition, or if you Explore a Waypoint and find an opportunity.
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Select table by: Region
       Tables:
         - Display name: Planetside Opportunity - Lifebearing
@@ -5057,10 +5434,10 @@ Rocky World:
   Name: Rocky World
   Aliases: [Rocky]
   Description: *Rocky
-  Content type: oracles
-  Templates:
-    - Name: Rocky World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Rocky World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -5069,9 +5446,9 @@ Rocky World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/wRpdlc1.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Aphelion
     - Artemis
@@ -5095,6 +5472,7 @@ Rocky World:
     - Umbra
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 65, *None_thin]
@@ -5137,8 +5515,7 @@ Rocky World:
             - [97, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Barren plains]
@@ -5153,8 +5530,7 @@ Rocky World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Crystalline formations]
@@ -5174,6 +5550,7 @@ Rocky World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 55, None]
         - [56, 65, Extinct]
@@ -5188,10 +5565,10 @@ Shattered World:
   Name: Shattered World
   Aliases: [Shattered]
   Description: *Shattered
-  Content type: oracles
-  Templates:
-    - Name: Shattered World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Shattered World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -5200,9 +5577,9 @@ Shattered World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/HKpmALQ.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Cavus
     - Chrysalis
@@ -5226,6 +5603,7 @@ Shattered World:
     - Zix
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 93, *None_thin]
@@ -5268,8 +5646,7 @@ Shattered World:
             - [100, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Demolished space fleet, *suggestDerelictStarship]
@@ -5284,8 +5661,7 @@ Shattered World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Broken cities]
@@ -5305,6 +5681,7 @@ Shattered World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 30, None]
         - [31, 80, Extinct]
@@ -5317,10 +5694,10 @@ Tainted World:
   Name: Tainted World
   Aliases: [Tainted]
   Description: *Tainted
-  Content type: oracles
-  Templates:
-    - Name: Tainted World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Tainted World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -5329,9 +5706,9 @@ Tainted World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/TPb8p6L.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Achlys
     - Animus
@@ -5355,6 +5732,7 @@ Tainted World:
     - Xanthous
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 65, *Toxic]
@@ -5395,8 +5773,7 @@ Tainted World:
             - [99, 100, *Planetside_settlement]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Expansive fungal plains]
@@ -5411,8 +5788,7 @@ Tainted World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Caustic gas storms]
@@ -5432,6 +5808,7 @@ Tainted World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 5, Simple]
         - [6, 15, Sparse]
@@ -5444,10 +5821,10 @@ Vital World:
   Name: Vital World
   Aliases: [Vital]
   Description: *Vital
-  Content type: oracles
-  Templates:
-    - Name: Vital World
-      Roles: [place]
+  Content tags: [oracles]
+  # Templates:
+  #   - Name: Vital World
+  #     Roles: [place]
   Subcategory of: Planet
   Category: Planetary Class
   Requires:
@@ -5456,9 +5833,9 @@ Vital World:
     Name: Starforged Backer Preview
     Date: "081921"
   Thumbnail: "https://i.imgur.com/Syhr8rp.png"
-  Inherits:
-    - Category: Planet
-      Name: [Peril, Opportunity]
+  # Inherits:
+  #   - Category: Planet
+  #     Name: [Peril, Opportunity]
   Sample Names:
     - Chiron
     - Demeter
@@ -5482,6 +5859,7 @@ Vital World:
     - Valinor
   Oracles:
     - Name: Atmosphere
+      Part of speech: [adjective]
       Initial: true
       Table:
         - [1, 20, *Marginal]
@@ -5525,8 +5903,7 @@ Vital World:
             - [99, 100, *Settlements_in_conflict]
 
     - Name: Observed From Space
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 11, Complex ring system]
@@ -5541,8 +5918,7 @@ Vital World:
         - [99, 100, *Vault_orbital]
 
     - Name: Planetside Feature
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 7, Background radiation]
@@ -5562,6 +5938,7 @@ Vital World:
         - [99, 100, *Vault_planetside]
 
     - Name: Life
+      Part of speech: [adjective]
       Table:
         - [1, 10, Sparse]
         - [11, 45, Diverse]
@@ -5569,6 +5946,7 @@ Vital World:
         - [86, 100, Overrun]
 
     - Name: Diversity
+      Part of speech: [adjective]
       Table:
         - [1, 20, Simple (two biomes), 2]
         - [21, 70, Diverse (three biomes), 3]
@@ -5578,8 +5956,7 @@ Vital World:
     - Name: Biomes
       Min rolls: 2
       Max rolls: 5
-      Semantics:
-        Part of speech: [common noun]
+      Part of speech: [noun, common noun]
       Table:
         - [1, 5, Caves]
         - [6, 10, Cold forest]
@@ -5605,7 +5982,7 @@ Vital World:
 Vault Interior:
   Name: Vault Interior
   Display name: Precursor Vault - Interior
-  Content type: oracles
+  Content tags: [oracles]
   Subcategory of: Precursor Vault
   Requires:
     Zone: [Vault Interior]
@@ -5616,8 +5993,7 @@ Vault Interior:
     - Name: First Look
       Display name: Inner First Look
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Max rolls: 2
       Table:
         - [1, 3, Abnormal gravity]
@@ -5656,8 +6032,7 @@ Vault Interior:
     - Name: Feature
       Display name: Interior Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 3, Ascending or descending path]
         - [4, 6, Biological growths]
@@ -5696,11 +6071,10 @@ Vault Interior:
         - [96, 100, *Roll_twice]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Display name: Interior Peril
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 5, Broken path]
         - [6, 10, Change in atmosphere or environment]
@@ -5725,11 +6099,10 @@ Vault Interior:
         - [100, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Display name: Interior Opportunity
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Clue points the way to your destination or target]
         - [11, 20, Clue to a lifeform's nature or vulnerabilities]
@@ -5747,23 +6120,23 @@ Precursor Vault:
   Name: Precursor Vault
   Display name: Precursor Vaults
   Aliases: [Vault]
-  Tags: [oracles,  location]
-  Templates:
-    - Name: Precursor Vault
-      Roles: [place]
-      Inherits:
-        - Category: Space
-          Name: [Peril, Opportunity]
-          Requires:
-            Location: [Orbital, Deep Space, Spaceborne]
-        - Category: Planet
-          Name: [Peril, Opportunity]
-          Requires:
-            Location: [Planetside]
-        - Category: Space
-          Name: [Stellar Object]
-          Requires:
-            Location: [Deep Space]
+  Tags: [oracles, location]
+  # Templates:
+  #   - Name: Precursor Vault
+  #     Roles: [place]
+  #     Inherits:
+  #       - Category: Space
+  #         Name: [Peril, Opportunity]
+  #         Requires:
+  #           Location: [Orbital, Deep Space, Spaceborne]
+  #       - Category: Planet
+  #         Name: [Peril, Opportunity]
+  #         Requires:
+  #           Location: [Planetside]
+  #       - Category: Space
+  #         Name: [Stellar Object]
+  #         Requires:
+  #           Location: [Deep Space]
   Subcategories: [Vault Interior, Vault Sanctum]
   Source:
     Name: Starforged Backer Preview
@@ -5771,6 +6144,7 @@ Precursor Vault:
   Oracles:
     - Name: Location
       Initial: true
+      Part of speech: [adjective]
       Table:
         - [1, 50, Planetside]
         - [51, 75, Orbital]
@@ -5778,8 +6152,7 @@ Precursor Vault:
 
     - Name: Scale
       Initial: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 30, "Minor, confined site"]
         - [31, 65, Typical site of limited scope]
@@ -5789,8 +6162,7 @@ Precursor Vault:
 
     - Name: Form
       Initial: true
-      Semantics:
-        Part of speech: [common noun]
+      Part of speech: [noun, common noun]
       Table:
         - [1, 35, Structure]
         - [36, 60, Vessel]
@@ -5800,8 +6172,7 @@ Precursor Vault:
 
     - Name: Shape
       Initial: true
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Table:
         - [1, 15, Practical or functional]
         - [16, 20, Geometric (complex shape)]
@@ -5822,8 +6193,7 @@ Precursor Vault:
 
     - Name: Material
       Initial: true
-      Semantics:
-        Part of speech: [adjective]
+      Part of speech: [adjective]
       Table:
         - [1, 30, Metallic (industrial)]
         - [31, 60, Metallic (smooth)]
@@ -5838,8 +6208,7 @@ Precursor Vault:
 
     - Name: First Look
       Display name: Outer First Look
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Initial: true
       Max rolls: 2
       Table:
@@ -5878,7 +6247,7 @@ Precursor Vault:
 Vault Sanctum:
   Name: Vault Sanctum
   Display name: Precursor Vault - Sanctum
-  Content type: oracles
+  Content tags: [oracles]
   Subcategory of: Precursor Vault
   Requires:
     Zone: [Vault Sanctum]
@@ -5888,8 +6257,7 @@ Vault Sanctum:
   Oracles:
     - Name: Purpose
       Display name: Vault Purpose
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 3, Capture or control of other beings]
         - [4, 6, Command or communication relay]
@@ -5924,8 +6292,7 @@ Vault Sanctum:
     - Name: Feature
       Display name: Sanctum Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 2, Abyssal pit or chasm]
         - [3, 5, Altered gravity]
@@ -5964,11 +6331,10 @@ Vault Sanctum:
         - [96, 100, *Roll_twice]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Display name: Sanctum Peril
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 5, Camouflaged or transforming foe reveals itself]
         - [6, 10, Confounding distortions of the timestream]
@@ -5993,11 +6359,10 @@ Vault Sanctum:
         - [100, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Display name: Sanctum Opportunity
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Access to a secret or protected area]
         - [11, 20, Clue points the way to your destination or target]
@@ -6016,15 +6381,14 @@ Access:
   Subcategory of: Derelict
   Category: Derelict Zones
   Requires:
-      - Zone: [Access]
+    Zone: [Access]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Area
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 50, Corridor]
         - [51, 60, Stairs]
@@ -6037,8 +6401,7 @@ Access:
 
     - Name: Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 5, Abandoned gear]
         - [6, 10, Blood trail]
@@ -6062,10 +6425,9 @@ Access:
         - [96, 100, *Descriptor+Focus]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Alarm or failsafe is triggered]
         - [11, 20, Automated defenses]
@@ -6080,10 +6442,9 @@ Access:
         - [99, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, "Directions, shortcut, or alternate path"]
         - [21, 40, "Encounter with a friendly survivor, explorer, or denizen"]
@@ -6098,15 +6459,14 @@ Community:
   Subcategory of: Derelict
   Category: Derelict Zones
   Requires:
-      - Zone: [ Community]
+    Zone: [ Community]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Area
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Bar or club]
         - [9, 16, Temple or chapel]
@@ -6123,8 +6483,7 @@ Community:
 
     - Name: Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Ad-hoc memorials]
         - [9, 16, Art depicting historic event]
@@ -6140,10 +6499,9 @@ Community:
         - [89, 100, *Descriptor+Focus]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Biological infestation]
         - [11, 20, Breached or broken structure]
@@ -6158,10 +6516,9 @@ Community:
         - [99, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Culturally significant object or artifact]
         - [21, 40, Salvageable goods or resources]
@@ -6176,15 +6533,14 @@ Engineering:
   Subcategory of: Derelict
   Category: Derelict Zones
   Requires:
-      - Zone: [ Engineering]
+    Zone: [ Engineering]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Area
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Control room]
         - [9, 16, Engine room or power core]
@@ -6201,8 +6557,7 @@ Engineering:
 
     - Name: Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Cluttered workbench]
         - [9, 16, Control terminal]
@@ -6218,10 +6573,9 @@ Engineering:
         - [89, 100, *Descriptor+Focus]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Corrosive leak]
         - [11, 20, Erratic utility bots]
@@ -6236,10 +6590,9 @@ Engineering:
         - [99, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Advanced or experimental equipment]
         - [21, 40, Chance to restore power or function]
@@ -6253,15 +6606,14 @@ Living:
   Subcategory of: Derelict
   Category: Derelict Zones
   Requires:
-      - Zone: [ Living]
+    Zone: [ Living]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Area
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Food storage]
         - [9, 16, Galley or kitchen]
@@ -6278,8 +6630,7 @@ Living:
 
     - Name: Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Abandoned pet]
         - [9, 16, Audible music]
@@ -6295,10 +6646,9 @@ Living:
         - [89, 100, *Descriptor+Focus]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Disgusting sight / smell]
         - [11, 20, Disturbing evidence of medical misconduct]
@@ -6313,10 +6663,9 @@ Living:
         - [99, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Culturally significant object or artifact]
         - [21, 40, Hidden stash of valuable contraband]
@@ -6331,15 +6680,14 @@ Medical:
   Subcategory of: Derelict
   Category: Derelict Zones
   Requires:
-      - Zone: [ Medical]
+    Zone: [ Medical]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Area
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Crematorium]
         - [9, 16, Emergency or triage]
@@ -6356,8 +6704,7 @@ Medical:
 
     - Name: Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Autopsied corpse]
         - [9, 16, Biological specimens]
@@ -6373,10 +6720,9 @@ Medical:
         - [89, 100, *Descriptor+Focus]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Disgusting sight / smell]
         - [11, 20, Disturbing evidence of medical misconduct]
@@ -6391,10 +6737,9 @@ Medical:
         - [99, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Cache of medicine]
         - [21, 40, Clues to a medical mystery]
@@ -6409,15 +6754,14 @@ Operations:
   Subcategory of: Derelict
   Category: Derelict Zones
   Requires:
-      - Zone: [ Operations]
+    Zone: [ Operations]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Area
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Admin or command offices]
         - [9, 16, Armory]
@@ -6434,8 +6778,7 @@ Operations:
 
     - Name: Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Automated warning]
         - [9, 16, Buckled blast doors]
@@ -6451,10 +6794,9 @@ Operations:
         - [89, 100, *Descriptor+Focus]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Automated defenses target you]
         - [11, 20, Broken equipment limits control]
@@ -6469,10 +6811,9 @@ Operations:
         - [99, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Cache of weapons or ammo]
         - [21, 40, Helpful AI]
@@ -6487,15 +6828,14 @@ Production:
   Subcategory of: Derelict
   Category: Derelict Zones
   Requires:
-      - Zone: [ Production]
+    Zone: [ Production]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Area
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Airlock or staging area]
         - [9, 16, Assembly or processing]
@@ -6512,8 +6852,7 @@ Production:
 
     - Name: Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Cargo lifts]
         - [9, 16, Control panels]
@@ -6529,10 +6868,9 @@ Production:
         - [89, 100, *Descriptor+Focus]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Claustrophobic spaces]
         - [11, 20, Dangerous machinery]
@@ -6547,10 +6885,9 @@ Production:
         - [99, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Helpful vehicle or transport]
         - [21, 40, Rare or valuable resource]
@@ -6565,15 +6902,14 @@ Research:
   Subcategory of: Derelict
   Category: Derelict Zones
   Requires:
-      - Zone: [ Research]
+    Zone: [ Research]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Area
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Clean room]
         - [9, 16, Cold storage]
@@ -6590,8 +6926,7 @@ Research:
 
     - Name: Feature
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 8, Aquarium or tank]
         - [9, 16, Biological specimens]
@@ -6607,10 +6942,9 @@ Research:
         - [89, 100, *Descriptor+Focus]
 
     - Name: Peril
-      Oracle type: peril
+      Content tags: [peril, event, present]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 10, Automated containment protocols are activated]
         - [11, 20, Biological infestation]
@@ -6625,10 +6959,9 @@ Research:
         - [99, 100, *Roll_twice]
 
     - Name: Opportunity
-      Oracle type: opportunity
+      Content tags: [opportunity]
       Repeatable: true
-      Semantics:
-        Part of speech: [fragment]
+      Part of speech: [fragment]
       Table:
         - [1, 20, Helpful research data]
         - [21, 40, Records of a notable discovery]

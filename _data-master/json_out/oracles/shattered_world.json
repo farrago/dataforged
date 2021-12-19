@@ -2,14 +2,12 @@
   "Name": "Shattered World",
   "Aliases": ["Shattered"],
   "Description": "A planet sundered by cataclysmic destruction.",
-  "Content type": "oracles",
-  "Templates": [{ "Name": "Shattered World", "Roles": ["place"] }],
+  "Content tags": ["oracles"],
   "Subcategory of": "Planet",
   "Category": "Planetary Class",
   "Requires": { "Planetary Class": ["Shattered World"] },
   "Source": { "Name": "Starforged Backer Preview", "Date": "081921" },
   "Thumbnail": "https://i.imgur.com/HKpmALQ.png",
-  "Inherits": [{ "Category": "Planet", "Name": ["Peril", "Opportunity"] }],
   "Sample Names": [
     "Cavus",
     "Chrysalis",
@@ -35,6 +33,7 @@
   "Oracles": [
     {
       "Name": "Atmosphere",
+      "Part of speech": ["adjective"],
       "Initial": true,
       "Table": [
         [
@@ -231,7 +230,7 @@
     },
     {
       "Name": "Observed From Space",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Max rolls": 2,
       "Table": [
         [
@@ -286,7 +285,7 @@
     },
     {
       "Name": "Planetside Feature",
-      "Semantics": { "Part of speech": ["fragment"] },
+      "Part of speech": ["fragment"],
       "Max rolls": 2,
       "Table": [
         [1, 7, "Broken cities"],
@@ -346,6 +345,7 @@
     },
     {
       "Name": "Life",
+      "Part of speech": ["adjective"],
       "Table": [
         [1, 30, "None"],
         [31, 80, "Extinct"],
