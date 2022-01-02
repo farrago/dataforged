@@ -1,37 +1,36 @@
 Character Creation:
   Name: Character Creation
   Aliases: [Creation]
-  Content tags: [oracles]
   Source:
     Name: Starforged Backer Preview
-    Date: "081921"
+    Date: "122421"
   Oracles:
     - Name: Background Assets
       Description: |-
-        If you want some direction for your starting paths, roll or pick from the table below. Roles marked with an asterisk (*) are not intended for solo play.
+        If you want some direction for your starting paths, roll or pick from the table below and take the two paths associated with your selected background.
       Content tags: [actor]
       Part of speech: [noun, common noun]
       Table:
-        - [1, 5, Adept, { Assets: [Kinetic, Vestige] }]
-        - [6, 10, Battlefield Medic, { Assets: [Healer, Veteran] }]
-        - [11, 15, Bodyguard*, { Assets: [Brawler, Loyalist] }]
-        - [16, 20, Delegate, { Assets: [Bannersworn, Diplomat] }]
-        - [21, 25, Exobiologist, { Assets: [Explorer, Naturalist] }]
-        - [26, 30, Far Trader, { Assets: [Navigator, Trader] }]
-        - [31, 35, Fugitive Hunter, { Assets: [Armored, Bounty Hunter] }]
-        - [36, 40, Hacker, { Assets: [Agent, Tech] }]
-        - [41, 45, Hotshot Pilot, { Assets: [Ace, Gunslinger] }]
-        - [46, 50, Monster Hunter, { Assets: [Archer, Slayer] }]
-        - [51, 55, Occultist, { Assets: [Outcast, Shade] }]
-        - [56, 60, Operative, { Assets: [Agent, Blademaster] }]
-        - [61, 65, Pilgrim, { Assets: [Devotant, Explorer] }]
-        - [66, 70, Prophet, { Assets: [Devotant, Seer] }]
-        - [71, 75, Smuggler, { Assets: [Courier, Scoundrel] }]
-        - [76, 80, Spiritualist, { Assets: [Haunted, Empath] }]
-        - [81, 85, Starship Captain*, { Assets: [Commander, Explorer] }]
-        - [86, 90, Starship Mechanic, { Assets: [Gearhead, Voidborn] }]
-        - [91, 95, Supersoldier, { Assets: [Augmented, Mercenary] }]
-        - [96, 100, Tomb Raider, { Assets: [Lore Hunter, Scavenger] }]
+        - [1, 5, Battlefield Medic, {Assets: [HEALER, VETERAN]}]
+        - [6, 10, Delegate, {Assets: [BANNERSWORN, DIPLOMAT]}]
+        - [11, 15, Exobiologist, {Assets: [ARCHIVIST, NATURALIST]}]
+        - [16, 20, Far Trader, {Assets: [NAVIGATOR, TRADER]}]
+        - [21, 25, Fugitive Hunter, {Assets: [ARMORED, BOUNTY HUNTER]}]
+        - [26, 30, Hacker, {Assets: [AGENT, TECH]}]
+        - [31, 35, Hotshot Pilot, {Assets: [ACE, NAVIGATOR]}]
+        - [36, 40, Interstellar Scout, {Assets: [EXPLORER, VOIDBORN]}]
+        - [41, 45, Monster Hunter, {Assets: [GUNNER, SLAYER]}]
+        - [46, 50, Occultist, {Assets: [OUTCAST, SHADE]}]
+        - [51, 55, Operative, {Assets: [AGENT, BLADEMASTER]}]
+        - [56, 60, Outlaw, {Assets: [FUGITIVE, GUNSLINGER]}]
+        - [61, 65, Private Investigator, {Assets: [BRAWLER, SLEUTH]}]
+        - [66, 70, Prophet, {Assets: [DEVOTANT, SEER]}]
+        - [71, 75, Psionicist, {Assets: [KINETIC, VESTIGE]}]
+        - [76, 80, Smuggler, {Assets: [COURIER, SCOUNDREL]}]
+        - [81, 85, Spiritualist, {Assets: [HAUNTED, EMPATH]}]
+        - [86, 90, Starship Engineer, {Assets: [GEARHEAD, TECH]}]
+        - [91, 95, Supersoldier, {Assets: [AUGMENTED, MERCENARY]}]
+        - [96, 100, Tomb Raider, {Assets: [SCAVENGER, SCOUNDREL]}]
     - Name: Backstory Prompts
       Description: |-
         For some backstory inspiration, roll or pick from the table below. Then, take a moment to elaborate on the suggestion. Or just leave it a bit vague and mysterious for now; you can flesh it out in play.
@@ -75,7 +74,8 @@ Character Creation:
         Your ship is an important aspect of your character—and a character in its own right. What does it look like? What makes it interesting or uniquely yours? Does it have any particular quirks? If nothing occurs to you now, you can flesh it out in play, or roll once or twice on the table below.
       Part of speech: [fragment]
       Content tags: [description]
-      Max rolls: 2
+      Usage:
+        Max rolls: 2
       Table:
         - [1, 5, Engine room is scorched with old burn marks]
         - [6, 10, Exterior is marred by rust and grime]
@@ -106,7 +106,8 @@ Character Creation:
         # todo: some kind of faction? hmm
         - [11, 15, Chaotic breaches in spacetime spread like wildfire]
         - [16, 20, Criminal faction corrupts local authorities, *suggestFringe]
-        - [21, 25, Devastating superweapon has fallen into the wrong hands]
+        # faction?
+        - [21, 25, Devastating superweapon has fallen into the wrong hands, *suggestFaction, *suggestNpc]
         - [26, 30, Energy storms are rampant]
         - [31, 35, Magnetic disturbances disrupt communication]
         - [36, 40, Newly found resource lures greedy fortune hunters to the sector, *suggestObject]
@@ -117,11 +118,11 @@ Character Creation:
         - [61, 65, Raider clan emerges as a dominant threat under a new leader, *suggestFringe]
         - [66, 70, Religious zealots overrun the sector, *suggestFringe]
         - [71, 75, Rogue AI infiltrates systems throughout the sector, *suggestFringe]
-        - [76, 80, Settlements or factions are on the brink of war, *suggestSettlement]
+        - [76, 80, Settlements or factions are on the brink of war, *suggestSettlement, *suggestFaction]
         # TODO: this seems like a solid reason to make it easy to do multiple Suggest objects
         # ideally a faction should be present
-        - [81, 85, Ships regularly go missing]
-        - [86, 90, Sickness spreads among ships and settlements]
+        - [81, 85, Ships regularly go missing, *suggestShip]
+        - [86, 90, Sickness spreads among ships and settlements, *suggestShip, *suggestSettlement]
         - [91, 95, Supernova is imminent]
         - [96, 100, Titanic spaceborne lifeform stalks the spaceways, *suggestCreature]
     - Name: Inciting Incident
@@ -133,18 +134,19 @@ Character Creation:
         - [11, 15, Chart a new passage between isolated settlements, *suggestSettlement]
         - [16, 20, Defend the people of a beleaguered settlement against raiders, *suggestSettlement]
         - [21, 25, Discover who sabotaged a settlement's air processors, *suggestSettlement]
-        - [26, 30, Escort a tradeship carrying a prized cargo, *suggestShip]
+        - [26, 30, Escort a tradeship carrying a prized cargo, *suggestShip, *suggestObject]
         - [31, 35, Ferry a rescue team to a perilous disaster site, *suggestPlace]
-        - [36, 40, Infiltrate a fortified base to steal crucial data]
-        - [41, 45, Investigate terrifying manifestations at a remote settlement, *suggestSettlement]
+        # fortified location theme
+        - [36, 40, Infiltrate a fortified base to steal crucial data, *suggestFaction, *suggestThemeFortified]
+        - [41, 45, Investigate terrifying manifestations at a remote settlement, *suggestSettlement, *suggestEvent]
         - [46, 50, Liberate prisoners at a cruel labor camp, *suggestPlace]
         - [51, 55, Locate a downed spacer on an uninhabited planet, *suggestPlanet]
         - [56, 60, Protect a fugitive from a relentless bounty hunter, *suggestNpc]
-        - [61, 65, Recover a cherished pre-exodus artifact from an enemy, *suggestObject]
+        - [61, 65, Recover a cherished pre-exodus artifact from an enemy, *suggestObject, *suggestNpc, *suggestFaction]
         - [66, 70, Rescue a starship crew held captive by mutineers, *suggestShip]
-        - [71, 75, Retrieve a cache of stolen weapons from a pirate ship, *suggestShip]
+        - [71, 75, Retrieve a cache of stolen weapons from a pirate ship, *suggestShip, *suggestFaction]
         - [76, 80, Sabotage an enemy installation, *suggestThemeFortified]
         - [81, 85, Search for a missing expedition in the depths of a precursor vault, *suggestVault]
         - [86, 90, Shield a wondrous lifeform from those who seek to destroy it, *suggestCreature]
         - [91, 95, Track and slay a marauding beast, *suggestCreature]
-        - [96, 100, Transport a displaced people to their new home, *suggestPlace]
+        - [96, 100, Transport a displaced people to their new home, *suggestFaction, *suggestPlace]

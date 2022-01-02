@@ -1,19 +1,19 @@
 Chaotic:
   Name: Chaotic
-  Display name: Location Theme - Chaotic
-  Subcategory of: Location Theme
+  Display name: Location Theme / Chaotic
+  _childOf: Location Theme
   Category: Theme
-  Content tags: [oracles]
   Description: *Chaotic
   Requires:
-    Theme Type: [Chaotic]
+    - Theme Type: [Chaotic]
   Source:
     Name: Starforged Backer Preview
     Date: "081921"
   Oracles:
     - Name: Feature
       Description: *theme_feature
-      Repeatable: true
+      Usage:
+        Repeatable: true
       Part of speech: [fragment]
       Table:
         - [1, 8, Alterations in the flow of time]
@@ -33,7 +33,8 @@ Chaotic:
     - Name: Peril
       Description: *theme_peril
       Content tags: [peril, event, present]
-      Repeatable: true
+      Usage:
+        Repeatable: true
       Part of speech: [fragment]
       Table:
         - [1, 9, Chaos makes its mark upon you]
@@ -52,7 +53,8 @@ Chaotic:
     - Name: Opportunity
       Description: *theme_opportunity
       Content tags: [opportunity]
-      Repeatable: true
+      Usage:
+        Repeatable: true
       Part of speech: [fragment]
       Table:
         - [1, 20, Chaos ebbs or withdraws for a time]

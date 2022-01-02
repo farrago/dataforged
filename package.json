@@ -1,6 +1,6 @@
 {
   "name": "dataforged",
-  "version": "0.0.1-alpha.101221",
+  "version": "0.0.1-alpha.122421",
   "description": "Official Ironsworn: Starforged rules data in JSON, for use in community tools.",
   "main": "",
   "scripts": {
